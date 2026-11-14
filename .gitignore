@@ -1,0 +1,9 @@
+.DS_Store
+.env*
+.vercel
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.venv/
+# Spike inputs and raw outputs can contain a token or large filings.
+docs/spikes/raw/

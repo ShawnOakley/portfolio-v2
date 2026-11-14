@@ -1,0 +1,23 @@
+# Where your key goes
+
+**Decision.** In the live demo, your CourtListener token and Anthropic key
+will be held in the page's memory, sent over TLS to this site's API function
+with each request, used for that request, and discarded. They will never be
+written to storage, cookies, logs or a database.
+
+**What this site will not claim.** It will not claim your key "never leaves
+your browser." It does leave: it passes through a stateless function on its
+way to CourtListener and Anthropic. Saying otherwise would be false, and this
+site's rule is to say only what the network tab will confirm.
+
+**How you will be able to check.** Open the network tab during a live run. The
+keys should appear in request headers to `/api/*` on this domain and nowhere
+else. The API's source is public, and a test will assert that a known fake key
+never appears in logs.
+
+**If you would rather not send a key.** Each project will also have a demo
+that needs no keys, built from saved results of real runs.
+
+_The live demo is not built yet. This note records the design. It will be
+checked against the network tab, and corrected if needed, before the demo is
+linked._

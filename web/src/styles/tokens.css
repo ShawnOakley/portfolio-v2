@@ -1,0 +1,86 @@
+/*
+ * Design tokens. Everything visual reads from here.
+ *
+ * Palette comes from the litigation desk, not from a UI kit: bond paper, ink,
+ * the blue of a litigation back, redline red, and highlighter yellow.
+ *
+ * Every color is a light-dark() pair. Which side applies follows
+ * `color-scheme`: the system setting by default, or the visitor's explicit
+ * choice when the theme control sets data-theme on <html>.
+ */
+:root {
+  color-scheme: light dark;
+
+  /* Surfaces and ink */
+  --paper: light-dark(#f5f6f8, #11151b);
+  --paper-raised: light-dark(#ffffff, #181d25);
+  --ink: light-dark(#10161f, #e7eaf0);
+  --ink-soft: light-dark(#4a5565, #a6afbd);
+  --rule: light-dark(#cfd5de, #2c3440);
+  --rule-strong: light-dark(#8b96a8, #5d6878);
+
+  /* Accent: blueback */
+  --accent: light-dark(#1b4b8f, #94baf2);
+  --accent-ink: light-dark(#ffffff, #0c1420);
+
+  /* Highlighter: marks text the reader should look at */
+  --highlight: light-dark(#ffe45c, #6b5a00);
+  --highlight-ink: light-dark(#10161f, #fff6c9);
+
+  /* Status: text color, tint behind it. Never the only signal. */
+  --found: light-dark(#17603c, #7fd3a4);
+  --found-tint: light-dark(#e2f1e8, #12301f);
+  --not-found: light-dark(#9a2318, #f4a096);
+  --not-found-tint: light-dark(#f9e4e1, #3a1814);
+  --ambiguous: light-dark(#7a4d00, #e9bf6a);
+  --ambiguous-tint: light-dark(#f8ecd2, #33270c);
+  --mismatch: light-dark(#5c3696, #c5a8f0);
+  --mismatch-tint: light-dark(#ece4f7, #281c40);
+  --questionable: light-dark(#94400a, #f2b184);
+  --questionable-tint: light-dark(#fbe7d8, #382010);
+  --treatment: light-dark(#0f5f6b, #7fd0da);
+  --treatment-tint: light-dark(#dcf0f2, #0e2c31);
+  --unchecked: light-dark(#4a5565, #a6afbd);
+  --unchecked-tint: light-dark(#e6e9ee, #232a34);
+
+  /* Type */
+  --font-ui: var(--font-public-sans), system-ui, sans-serif;
+  --font-doc: var(--font-literata), "Century Schoolbook", Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Scale: 1.2 minor third on a 1rem base */
+  --step--1: 0.833rem;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: 1.44rem;
+  --step-3: 1.728rem;
+  --step-4: 2.074rem;
+  --step-5: clamp(2.2rem, 1.6rem + 2.6vw, 3.2rem);
+
+  --leading-ui: 1.5;
+  --leading-doc: 1.65;
+  --measure: 66ch;
+
+  /* Space: 4px base */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  --radius: 3px;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  /* The pleading-paper margin: where the double rule sits. */
+  --margin-rule: clamp(1.25rem, 6vw, 5.5rem);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}

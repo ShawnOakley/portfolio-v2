@@ -1,0 +1,55 @@
+export const metadata = {
+  title: "Colophon",
+  description: "How this site is built, and the budgets it holds itself to.",
+};
+
+# Colophon
+
+This site is part of the portfolio: it is meant to be read as code as well as
+pages.
+
+## Stack
+
+| Layer     | Choice                                                                                                      |
+| --------- | ----------------------------------------------------------------------------------------------------------- |
+| Framework | Next.js 16, App Router, TypeScript in strict mode                                                           |
+| Styling   | CSS custom properties for tokens, CSS Modules for components. No CSS framework, no runtime styling library. |
+| Content   | MDX files in the repository                                                                                 |
+| Engine    | The `citecheck` Python package behind a thin FastAPI service, pinned to a version shown in the footer       |
+| Hosting   | Vercel, both services in one project                                                                        |
+
+## Type
+
+Document text is set in Literata, a book face, because filings and opinions
+are meant to be read at length. Interface text is set in Public Sans, the
+open typeface of the U.S. government's design system. Both are self-hosted;
+the site makes no request to a font service.
+
+## Color
+
+The palette comes from a litigation desk: bond paper, ink, the blue of a
+litigation back, redline red, and highlighter yellow. Every status has its own
+icon shape and a text label, so no meaning depends on color.
+
+Light and dark follow your device by default. The control in the header lets
+you choose either one, and "Auto" returns to the device setting. Your choice
+is stored in this browser only.
+
+## Budgets
+
+These are enforced in continuous integration. A change that breaks one does
+not merge.
+
+| Budget                   | Limit                                                      |
+| ------------------------ | ---------------------------------------------------------- |
+| Accessibility            | Zero axe violations on every route, in light and dark mode |
+| Lighthouse performance   | 95 or higher                                               |
+| Lighthouse accessibility | 100                                                        |
+| Largest contentful paint | 2.0 seconds or less                                        |
+| Cumulative layout shift  | 0.05 or less                                               |
+| Total blocking time      | 150 ms or less                                             |
+
+## Tests
+
+Unit tests run in Vitest. End-to-end and accessibility tests run in Playwright
+against a production build. The API has its own tests in pytest.

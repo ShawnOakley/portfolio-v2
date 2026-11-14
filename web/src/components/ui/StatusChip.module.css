@@ -1,0 +1,50 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.15em 0.6em 0.15em 0.45em;
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--chip-ink);
+  background: var(--chip-tint);
+  box-shadow: inset 2px 0 0 var(--chip-ink);
+}
+
+.icon {
+  width: 0.85em;
+  height: 0.85em;
+  flex: none;
+}
+
+.chip[data-status="found"] {
+  --chip-ink: var(--found);
+  --chip-tint: var(--found-tint);
+}
+.chip[data-status="not_found"] {
+  --chip-ink: var(--not-found);
+  --chip-tint: var(--not-found-tint);
+}
+.chip[data-status="ambiguous"] {
+  --chip-ink: var(--ambiguous);
+  --chip-tint: var(--ambiguous-tint);
+}
+.chip[data-status="quote_mismatch"] {
+  --chip-ink: var(--mismatch);
+  --chip-tint: var(--mismatch-tint);
+}
+.chip[data-status="support_questionable"] {
+  --chip-ink: var(--questionable);
+  --chip-tint: var(--questionable-tint);
+}
+.chip[data-status="negative_treatment"] {
+  --chip-ink: var(--treatment);
+  --chip-tint: var(--treatment-tint);
+}
+.chip[data-status="unchecked"] {
+  --chip-ink: var(--unchecked);
+  --chip-tint: var(--unchecked-tint);
+}

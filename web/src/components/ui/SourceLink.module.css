@@ -1,0 +1,11 @@
+.source {
+  font-family: var(--font-ui);
+}
+
+.host {
+  color: var(--ink-soft);
+  font-size: 0.9em;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 0.3em;
+}

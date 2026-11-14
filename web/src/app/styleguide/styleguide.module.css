@@ -1,0 +1,42 @@
+.section {
+  margin-top: var(--space-7);
+}
+
+.section h2 {
+  font-size: var(--step-2);
+  margin-bottom: var(--space-4);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+  align-items: flex-start;
+}
+
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--step--1);
+}
+
+.swatch {
+  height: 3rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-1);
+}
+
+.scale p {
+  font-family: var(--font-doc);
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+}

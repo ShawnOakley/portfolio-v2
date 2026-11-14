@@ -1,0 +1,23 @@
+[project]
+name = "site-api"
+version = "0.1.0"
+description = "Thin HTTP layer over the citecheck engine. Adds routing only."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.117.1",
+    # Add the engine here, pinned, once it is published:
+    # "citecheck==0.1.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8", "httpx>=0.27", "uvicorn>=0.30", "ruff>=0.6"]
+
+[tool.vercel]
+entrypoint = "main:app"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 88

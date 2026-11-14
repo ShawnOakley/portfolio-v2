@@ -1,0 +1,50 @@
+.metric {
+  margin: 0;
+  font-family: var(--font-ui);
+  min-width: 12rem;
+}
+
+.label {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.value {
+  font-family: var(--font-doc);
+  font-size: var(--step-4);
+  font-weight: 600;
+  line-height: 1.1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.track {
+  position: relative;
+  height: 0.75rem;
+  margin: var(--space-2) 0;
+  background: linear-gradient(var(--rule), var(--rule)) center / 100% 1px
+    no-repeat;
+}
+
+.interval {
+  position: absolute;
+  top: 50%;
+  height: 4px;
+  translate: 0 -50%;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.point {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  translate: -1px 0;
+  background: var(--ink);
+}
+
+.detail {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
