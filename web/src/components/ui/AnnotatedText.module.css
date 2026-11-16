@@ -10,6 +10,7 @@
 }
 
 .mark[aria-pressed="true"],
+.mark[data-selected="true"],
 .mark[data-pointed="true"] {
   background: var(--highlight);
   color: var(--highlight-ink);

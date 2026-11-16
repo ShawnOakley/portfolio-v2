@@ -55,6 +55,9 @@ function renderNode(
   state.seen.add(node.span.id);
   const pressed = node.span.id === state.selected;
   const pointed = node.span.id === state.linkedId;
+  // A button cannot contain another button. Only the innermost span is one.
+  const leaf = !node.children.some((child) => child.type === "span");
+  const interactive = first && leaf;
   return (
     <span
       key={key}
@@ -62,9 +65,10 @@ function renderNode(
       data-span={node.span.id}
       data-kind={node.span.kind}
       data-pointed={pointed ? "true" : undefined}
-      role={first ? "button" : undefined}
-      tabIndex={first ? 0 : undefined}
-      aria-pressed={first ? pressed : undefined}
+      data-selected={pressed ? "true" : undefined}
+      role={interactive ? "button" : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      aria-pressed={interactive ? pressed : undefined}
       onClick={(event) => {
         event.stopPropagation();
         state.select(node.span.id);
