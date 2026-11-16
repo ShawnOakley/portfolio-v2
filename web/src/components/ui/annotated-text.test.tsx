@@ -21,7 +21,7 @@ describe("layoutText", () => {
   it("nests a span inside the span that contains it", () => {
     const [full] = layoutText(citation, nested);
     expect(full).toMatchObject({ type: "span", span: { id: "full" } });
-    if (full.type !== "span") return;
+    if (full?.type !== "span") return;
     const ids = full.children
       .filter((node) => node.type === "span")
       .map((node) => node.span.id);

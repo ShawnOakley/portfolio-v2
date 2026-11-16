@@ -21,8 +21,8 @@ export default function Home() {
       <p className={styles.status}>
         The first tool, a cite-checker, is in progress. Until it ships, the{" "}
         <Link href="/notes">design notes</Link> record the decisions behind it.{" "}
-        <Link href="/learn/citation-anatomy">How a citation is built</Link> is a
-        separate page, and it does not describe the tool.
+        <Link href="/learn">Learn</Link> is separate, and it does not describe
+        the tool.
       </p>
     </>
   );

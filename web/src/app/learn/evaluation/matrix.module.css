@@ -1,0 +1,36 @@
+.table {
+  margin-top: var(--space-6);
+  border-collapse: collapse;
+  font-family: var(--font-ui);
+}
+
+.table th,
+.table td {
+  padding: var(--space-2) var(--space-3) var(--space-2) 0;
+  text-align: left;
+  font-weight: 400;
+}
+
+.table caption {
+  caption-side: bottom;
+  margin-top: var(--space-3);
+  color: var(--ink-soft);
+  text-align: left;
+}
+
+.input {
+  width: 5rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+}
+
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}

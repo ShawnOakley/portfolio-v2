@@ -1,0 +1,22 @@
+.list {
+  list-style: none;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.item {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.title {
+  font-family: var(--font-doc);
+  font-size: var(--step-1);
+  font-weight: 600;
+}
+
+.summary {
+  margin-top: var(--space-1);
+  color: var(--ink-soft);
+}

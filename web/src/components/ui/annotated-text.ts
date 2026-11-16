@@ -60,9 +60,10 @@ function layoutInner(
     )
     .sort((a, b) => a.start - b.start || b.end - a.end);
 
-  const overlaps = top.some(
-    (span, index) => index > 0 && span.start < top[index - 1].end,
-  );
+  const overlaps = top.some((span, index) => {
+    const previous = top[index - 1];
+    return previous !== undefined && span.start < previous.end;
+  });
   if (overlaps) return splitOverlaps(text, spans, start, end);
 
   const nodes: LayoutNode[] = [];
@@ -103,6 +104,7 @@ function splitOverlaps(
   for (let i = 0; i < cuts.length - 1; i++) {
     const from = cuts[i];
     const to = cuts[i + 1];
+    if (from === undefined || to === undefined) continue;
     const covering = spans
       .filter((span) => span.start <= from && span.end >= to)
       .sort((a, b) => a.end - a.start - (b.end - b.start));
