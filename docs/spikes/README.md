@@ -25,8 +25,13 @@ A JSON array means cross-origin works. A CORS error in the console means it
 does not. Either way the engine stays in Python; this only records whether a
 browser-direct path is possible at all.
 
-- Result:
-- Date:
+- Result: The browser is not blocked. On 2026-11-16, from
+  https://portfolio-v2-sage-xi-69.vercel.app, the page's own `fetch` of
+  `POST /api/rest/v4/citation-lookup/` read the response. A placeholder token
+  returned HTTP 401 and `{"detail":"Invalid token."}`. That is not a citation
+  array, and it is not a CORS error. A real token is still required before
+  this path can be treated as a working lookup.
+- Date: 2026-11-16
 
 ## B. What does the lookup return for the Mata v. Avianca citations?
 
