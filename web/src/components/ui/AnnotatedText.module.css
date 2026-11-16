@@ -1,0 +1,17 @@
+.root {
+  font: inherit;
+  user-select: text;
+}
+
+.mark {
+  border-bottom: 1px solid var(--rule-strong);
+  cursor: pointer;
+  user-select: text;
+}
+
+.mark[aria-pressed="true"],
+.mark[data-pointed="true"] {
+  background: var(--highlight);
+  color: var(--highlight-ink);
+  border-bottom-color: transparent;
+}

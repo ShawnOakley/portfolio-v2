@@ -1,0 +1,20 @@
+# No rich-text editor
+
+**Decision.** Explainers are MDX files in the repository. A visitor's brief
+arrives as a PDF or as pasted plain text. The site will not embed a rich-text
+editor.
+
+**Why.** The text a check reads is a string, and every highlight is a pair of
+offsets into that string. A rich-text editor stores its own document, and
+those offsets would have to be translated on every keystroke. Plain text keeps
+the offsets the same numbers the engine uses.
+
+**What I rejected.**
+
+- _Quill._ A document model of its own, with offsets that are not the string
+  the checker reads.
+- _Tiptap._ The same problem, built on ProseMirror.
+- _Lexical._ The same problem, with a different document model.
+
+**Cost.** A visitor cannot bold or indent the brief on this page. Formatting
+was never what the check reads.

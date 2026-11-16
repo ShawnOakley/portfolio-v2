@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AiBadge } from "@/components/ui/AiBadge";
+import { AnnotatedText } from "@/components/ui/AnnotatedText";
 import { Callout } from "@/components/ui/Callout";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { DocumentFrame } from "@/components/ui/DocumentFrame";
@@ -107,6 +108,30 @@ export default function StyleGuide() {
         <Callout kind="illustration">
           This example was written by hand to explain an idea.
         </Callout>
+      </section>
+
+      <section className={styles.section}>
+        <h2>Annotated text</h2>
+        <p>
+          <AnnotatedText
+            label="Example citation"
+            text="Example v. Sample, 123 F.3d 456."
+            spans={[
+              {
+                start: 0,
+                end: "Example v. Sample, 123 F.3d 456.".length,
+                kind: "citation",
+                id: "full",
+              },
+              {
+                start: 0,
+                end: "Example v. Sample".length,
+                kind: "case",
+                id: "case",
+              },
+            ]}
+          />
+        </p>
       </section>
 
       <section className={styles.section}>
