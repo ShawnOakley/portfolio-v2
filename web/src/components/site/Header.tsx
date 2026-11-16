@@ -4,6 +4,7 @@ import { ThemeControl } from "./ThemeControl";
 
 /** Only routes that have real content appear here. */
 const NAV = [
+  { href: "/about", label: "About" },
   { href: "/notes", label: "Design notes" },
   { href: "/colophon", label: "Colophon" },
 ];
