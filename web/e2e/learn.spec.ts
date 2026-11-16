@@ -32,7 +32,7 @@ test("the evaluation counts can be changed from the keyboard", async ({
     name: "Actual yes, predicted yes",
   });
   await predictedYes.fill("40");
-  await expect(page.getByRole("figure", { name: "Precision" })).toContainText(
-    "40 of 45",
-  );
+  await expect(
+    page.getByRole("figure", { name: "Precision", exact: true }),
+  ).toContainText("40 of 45");
 });
