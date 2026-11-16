@@ -82,7 +82,9 @@ describe("AnnotatedText", () => {
     render(<AnnotatedText text={text} spans={spans} label="Citation" />);
     fireEvent.click(screen.getByRole("button", { name: "id." }));
     expect(
-      document.querySelector('[data-span="full"]')?.getAttribute("data-pointed"),
+      document
+        .querySelector('[data-span="full"]')
+        ?.getAttribute("data-pointed"),
     ).toBe("true");
   });
 });
