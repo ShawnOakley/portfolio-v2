@@ -1,5 +1,3 @@
-import styles from "./CodeBlock.module.css";
-
 export function CodeBlock({
   children,
   label,
@@ -8,10 +6,17 @@ export function CodeBlock({
   label?: string;
 }) {
   return (
-    <figure className={styles.block}>
-      {label && <figcaption className={styles.label}>{label}</figcaption>}
+    <figure className="m-0 rounded-site border border-rule bg-paper-raised">
+      {label && (
+        <figcaption className="border-b border-rule px-site-4 py-site-2 font-sans text-step-small text-ink-soft">
+          {label}
+        </figcaption>
+      )}
       {/* tabIndex lets keyboard users scroll long lines. */}
-      <pre className={styles.pre} tabIndex={0}>
+      <pre
+        className="m-0 overflow-x-auto p-site-4 leading-[1.55] tab-2"
+        tabIndex={0}
+      >
         <code>{children}</code>
       </pre>
     </figure>

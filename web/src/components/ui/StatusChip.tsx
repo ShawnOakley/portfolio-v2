@@ -1,5 +1,4 @@
 import { STATUSES, type Status } from "@/lib/status";
-import styles from "./StatusChip.module.css";
 
 /** Each status has its own shape, so meaning never rests on color alone. */
 const ICONS: Record<Status, React.ReactNode> = {
@@ -14,12 +13,31 @@ const ICONS: Record<Status, React.ReactNode> = {
   unchecked: <path d="M3 6h6" />,
 };
 
+const TONES: Record<Status, string> = {
+  found: "bg-found-tint text-found shadow-[inset_2px_0_0_var(--found)]",
+  not_found:
+    "bg-not-found-tint text-not-found shadow-[inset_2px_0_0_var(--not-found)]",
+  ambiguous:
+    "bg-ambiguous-tint text-ambiguous shadow-[inset_2px_0_0_var(--ambiguous)]",
+  quote_mismatch:
+    "bg-mismatch-tint text-mismatch shadow-[inset_2px_0_0_var(--mismatch)]",
+  support_questionable:
+    "bg-questionable-tint text-questionable shadow-[inset_2px_0_0_var(--questionable)]",
+  negative_treatment:
+    "bg-treatment-tint text-treatment shadow-[inset_2px_0_0_var(--treatment)]",
+  unchecked:
+    "bg-unchecked-tint text-unchecked shadow-[inset_2px_0_0_var(--unchecked)]",
+};
+
 export function StatusChip({ status }: { status: Status }) {
   const { label, description } = STATUSES[status];
   return (
-    <span className={styles.chip} data-status={status} title={description}>
+    <span
+      className={`inline-flex items-center gap-[0.4em] rounded-site py-[0.15em] pr-[0.6em] pl-[0.45em] font-sans text-step-small leading-[1.4] font-semibold whitespace-nowrap ${TONES[status]}`}
+      title={description}
+    >
       <svg
-        className={styles.icon}
+        className="size-[0.85em] shrink-0"
         viewBox="0 0 12 12"
         aria-hidden="true"
         fill="none"

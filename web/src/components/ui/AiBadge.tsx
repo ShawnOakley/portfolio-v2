@@ -1,13 +1,14 @@
-import styles from "./AiBadge.module.css";
-
 /**
  * Marks anything a model produced. The wording is fixed: the site never
  * presents a model's reading of a case as a conclusion.
  */
 export function AiBadge({ model }: { model?: string }) {
   return (
-    <span className={styles.badge}>
-      <span className={styles.mark} aria-hidden="true">
+    <span className="inline-flex items-baseline gap-[0.5em] font-sans text-step-small text-ink-soft">
+      <span
+        className="rounded-site border border-ink px-[0.35em] leading-[1.35] font-bold tracking-[0.04em] text-ink"
+        aria-hidden="true"
+      >
         AI
       </span>
       <span>

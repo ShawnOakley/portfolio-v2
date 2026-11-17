@@ -1,5 +1,3 @@
-import styles from "./Figure.module.css";
-
 export function Figure({
   caption,
   children,
@@ -8,9 +6,13 @@ export function Figure({
   children: React.ReactNode;
 }) {
   return (
-    <figure className={styles.figure}>
-      <div className={styles.body}>{children}</div>
-      <figcaption className={styles.caption}>{caption}</figcaption>
+    <figure className="m-0">
+      <div className="rounded-site border border-rule bg-paper-raised p-site-5">
+        {children}
+      </div>
+      <figcaption className="mt-site-2 font-sans text-step-small text-ink-soft">
+        {caption}
+      </figcaption>
     </figure>
   );
 }

@@ -1,5 +1,3 @@
-import styles from "./SourceLink.module.css";
-
 /** A fact's source. Shows the host, so the reader sees where a link leads. */
 export function SourceLink({
   href,
@@ -15,9 +13,13 @@ export function SourceLink({
     // Relative links have no host to show.
   }
   return (
-    <a className={styles.source} href={href} rel="noreferrer">
+    <a className="font-sans" href={href} rel="noreferrer">
       {children}
-      {host && <span className={styles.host}>({host})</span>}
+      {host && (
+        <span className="ml-[0.3em] inline-block text-[0.9em] text-ink-soft no-underline">
+          ({host})
+        </span>
+      )}
     </a>
   );
 }
