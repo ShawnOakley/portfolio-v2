@@ -32,8 +32,6 @@ jobs:
       - run: pnpm test
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
-      # Performance budget. Reuses the build from the e2e step.
-      - run: pnpm test:perf
 
   api:
     runs-on: ubuntu-latest

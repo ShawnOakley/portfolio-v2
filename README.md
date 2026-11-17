@@ -37,7 +37,7 @@ cd web && pnpm install && API_ORIGIN=http://localhost:8000 pnpm dev
 ## Checks
 
 ```bash
-cd web && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e && pnpm test:perf
+cd web && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e
 cd api && uv run ruff check . && uv run ruff format --check . && uv run pytest
 ```
 

@@ -79,6 +79,7 @@ export const experience: Role[] = [
     dates: "Dec 2023 – May 2024",
     outcome:
       "Built web AR and modeling tools for construction and insurance, on LiDAR, Three.js, React, Rails, and Python.",
+    explains: { label: "Gaussian splats", href: "/graphics/splats" },
   },
   {
     title: "Senior web graphics engineer",

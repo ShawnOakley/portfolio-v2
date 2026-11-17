@@ -5,6 +5,9 @@ import { expect, test } from "@playwright/test";
 const ROUTES = [
   "/",
   "/about",
+  "/graphics",
+  "/graphics/splats",
+  "/graphics/projection",
   "/learn",
   "/learn/citation-anatomy",
   "/learn/citation-failures",
