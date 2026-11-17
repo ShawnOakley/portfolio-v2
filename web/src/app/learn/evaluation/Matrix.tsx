@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Metric } from "@/components/ui/Metric";
 import { scaledCount } from "@/lib/evaluation";
-import styles from "./matrix.module.css";
 
 const FIELDS = [
   { key: "tp", label: "Actual yes, predicted yes" },
@@ -37,7 +36,7 @@ export function Matrix() {
 
   return (
     <div>
-      <table className={styles.table}>
+      <table className="mt-site-6 border-collapse font-sans [&_caption]:mt-site-3 [&_caption]:caption-bottom [&_caption]:text-left [&_caption]:text-ink-soft [&_td]:py-site-2 [&_td]:pr-site-3 [&_td]:text-left [&_td]:font-normal [&_th]:py-site-2 [&_th]:pr-site-3 [&_th]:text-left [&_th]:font-normal">
         <caption>Illustrative counts. These are not measured results.</caption>
         <thead>
           <tr>
@@ -79,7 +78,7 @@ export function Matrix() {
           </tr>
         </tbody>
       </table>
-      <div className={styles.metrics}>
+      <div className="mt-site-6 flex flex-wrap gap-site-5">
         {precisionN > 0 ? (
           <Metric label="Precision" successes={cells.tp} n={precisionN} />
         ) : (
@@ -92,7 +91,7 @@ export function Matrix() {
         )}
       </div>
       {precisionN > 0 && (
-        <div className={styles.metrics}>
+        <div className="mt-site-6 flex flex-wrap gap-site-5">
           <Metric label="Same precision at 50 items" successes={at50} n={50} />
           <Metric
             label="Same precision at 500 items"
@@ -120,7 +119,7 @@ function Cell({
     <td>
       <input
         aria-label={label}
-        className={styles.input}
+        className="w-20 rounded-site border border-rule bg-paper-raised p-site-2 font-[inherit] text-ink"
         inputMode="numeric"
         min={0}
         type="number"

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Callout } from "@/components/ui/Callout";
 import { SourceLink } from "@/components/ui/SourceLink";
-import styles from "./failures.module.css";
 
 export const metadata: Metadata = {
   title: "Citation failures",
@@ -66,7 +65,7 @@ export default function CitationFailuresPage() {
         The decision is about Rule 11 sanctions. It does not discuss that stay.
         The case is real, and it does not say what the sentence claimed.
       </p>
-      <p className={styles.note}>
+      <p className="text-ink-soft">
         Nothing on this page describes the people who filed the brief.
       </p>
     </article>

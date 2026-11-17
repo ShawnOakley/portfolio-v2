@@ -7,7 +7,6 @@ import {
   citationText,
   partLabels,
 } from "@/content/citation-anatomy";
-import styles from "./passage.module.css";
 
 export function CitationPassage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -16,7 +15,7 @@ export function CitationPassage() {
 
   return (
     <div>
-      <p className={styles.passage}>
+      <p className="mt-site-6 font-serif text-[1.0625rem] leading-[1.65]">
         <AnnotatedText
           text={citationText}
           spans={citationSpans}
@@ -25,7 +24,7 @@ export function CitationPassage() {
           label="Citation with its short forms"
         />
       </p>
-      <p className={styles.status} role="status">
+      <p className="mt-site-4 min-h-6 text-ink-soft" role="status">
         {selected
           ? `${partLabels[selected.kind] ?? selected.kind}.${
               pointsAtFull ? " This points at the full citation." : ""

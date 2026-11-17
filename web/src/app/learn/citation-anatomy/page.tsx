@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Callout } from "@/components/ui/Callout";
 import { CitationPassage } from "./CitationPassage";
-import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Citation anatomy",
@@ -22,7 +21,7 @@ export default function CitationAnatomyPage() {
         cite-checker.
       </Callout>
       <CitationPassage />
-      <p className={styles.note}>
+      <p className="mt-site-6 text-ink-soft">
         The court is written again in the parentheses so it can be selected. In
         the form lawyers usually write, the reporter U.S. already names the
         Supreme Court, and the parentheses hold only the year.
