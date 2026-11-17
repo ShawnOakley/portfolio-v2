@@ -26,7 +26,12 @@ describe("resume", () => {
       roles.flatMap((role) => (role.explains ? [role.explains.label] : [])),
     );
     expect(linked).toEqual(
-      new Set(["This site", "Hatch-Waxman tracker", "Sourcing every fact"]),
+      new Set([
+        "This site",
+        "Hatch-Waxman tracker",
+        "Sourcing every fact",
+        "Gaussian splats",
+      ]),
     );
   });
 });
