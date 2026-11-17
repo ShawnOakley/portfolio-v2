@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { explainers } from "@/content/explainers";
-import styles from "./learn.module.css";
+import { IndexItem, IndexList } from "@/components/site/IndexList";
 
 export const metadata: Metadata = {
   title: "Learn",
@@ -16,16 +15,16 @@ export default function LearnPage() {
       <p className="lede">
         These pages explain the subject. They do not say what the tools do.
       </p>
-      <ul className={styles.list}>
+      <IndexList>
         {explainers.map((page) => (
-          <li key={page.href} className={styles.item}>
-            <Link className={styles.title} href={page.href}>
-              {page.title}
-            </Link>
-            <p className={styles.summary}>{page.summary}</p>
-          </li>
+          <IndexItem
+            key={page.href}
+            href={page.href}
+            title={page.title}
+            summary={page.summary}
+          />
         ))}
-      </ul>
+      </IndexList>
     </>
   );
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { SplatViewer } from "./SplatViewer";
-import styles from "../graphics.module.css";
 
 export const metadata: Metadata = {
   title: "Gaussian splats",
@@ -17,7 +16,7 @@ export default function SplatsPage() {
         file is not a Hover capture.
       </p>
       <SplatViewer />
-      <p className={styles.credit}>
+      <p className="mt-site-3 text-ink-soft">
         Lion scan by <a href="https://superspl.at/user?id=rohls">Renaud</a>,{" "}
         <a href="https://superspl.at/scene/56155c3f">SuperSplat</a>,{" "}
         <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.

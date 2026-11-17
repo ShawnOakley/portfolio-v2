@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ProjectionViewer } from "./ProjectionViewer";
-import styles from "../graphics.module.css";
 
 export const metadata: Metadata = {
   title: "Projection viewer",
@@ -18,7 +17,7 @@ export default function ProjectionPage() {
         is the kind of viewer rebuilt at YouVisit. The room is a stand-in.
       </p>
       <ProjectionViewer />
-      <p className={styles.credit}>
+      <p className="mt-site-3 text-ink-soft">
         Drag to look. Arrow keys turn the view. The brown uncovered walls are
         the room where the photograph does not reach.
       </p>

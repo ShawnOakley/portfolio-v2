@@ -2,7 +2,6 @@
 
 import { useSyncExternalStore } from "react";
 import { applyTheme, readStoredTheme, THEMES, type Theme } from "@/lib/theme";
-import styles from "./ThemeControl.module.css";
 
 const LABELS: Record<Theme, string> = {
   system: "Auto",
@@ -41,19 +40,24 @@ export function ThemeControl() {
   );
 
   return (
-    <fieldset className={styles.control}>
+    <fieldset className="m-0 inline-flex rounded-site border border-rule-strong p-0 text-step-small">
       <legend className="visually-hidden">Color theme</legend>
       {THEMES.map((option) => (
-        <label key={option} className={styles.option}>
+        <label
+          key={option}
+          className="cursor-pointer border-l border-rule-strong first:border-l-0"
+        >
           <input
-            className="visually-hidden"
+            className="visually-hidden peer"
             type="radio"
             name="theme"
             value={option}
             checked={theme === option}
             onChange={() => choose(option)}
           />
-          <span>{LABELS[option]}</span>
+          <span className="block min-h-6 px-site-3 py-site-1 text-ink-soft peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
+            {LABELS[option]}
+          </span>
         </label>
       ))}
     </fieldset>

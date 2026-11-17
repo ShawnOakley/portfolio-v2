@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { listNotes } from "@/lib/notes";
-import styles from "../notes.module.css";
 
 // Only the notes that exist are routes; anything else is a real 404.
 export const dynamicParams = false;
@@ -26,7 +25,7 @@ export default async function NotePage({ params }: PageProps<"/notes/[slug]">) {
   const { default: Note } = await import(`@/content/notes/${slug}.mdx`);
   return (
     <>
-      <p className={styles.back}>
+      <p className="mb-site-5 text-step-small">
         <Link href="/notes">All design notes</Link>
       </p>
       <Note />

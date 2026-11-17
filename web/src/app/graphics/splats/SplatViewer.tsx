@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "../graphics.module.css";
+import { stageClass } from "../stage";
 
 export function SplatViewer() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -134,7 +134,7 @@ export function SplatViewer() {
     <>
       <div
         ref={mountRef}
-        className={styles.stage}
+        className={stageClass}
         tabIndex={0}
         role="application"
         aria-label="Gaussian splat of a lion. Drag to orbit, or use the arrow keys."

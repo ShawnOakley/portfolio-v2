@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "../graphics.module.css";
+import { stageClass } from "../stage";
 
 const vertexShader = /* glsl */ `
   uniform mat4 projectorMatrix;
@@ -186,7 +186,7 @@ export function ProjectionViewer() {
     <>
       <div
         ref={mountRef}
-        className={styles.stage}
+        className={stageClass}
         tabIndex={0}
         role="application"
         aria-label="Projected photograph of a stand-in room. Drag to look, or use the arrow keys."

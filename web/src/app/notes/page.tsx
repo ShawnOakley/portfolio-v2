@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { listNotes } from "@/lib/notes";
-import styles from "./notes.module.css";
+import { IndexItem, IndexList } from "@/components/site/IndexList";
 
 export const metadata: Metadata = {
   title: "Design notes",
@@ -16,16 +15,16 @@ export default async function NotesPage() {
       <p className="lede">
         Each note records one decision, the reason for it, and what I rejected.
       </p>
-      <ul className={styles.list}>
+      <IndexList>
         {notes.map((note) => (
-          <li key={note.slug} className={styles.item}>
-            <Link className={styles.title} href={`/notes/${note.slug}`}>
-              {note.title}
-            </Link>
-            {note.summary && <p className={styles.summary}>{note.summary}</p>}
-          </li>
+          <IndexItem
+            key={note.slug}
+            href={`/notes/${note.slug}`}
+            title={note.title}
+            summary={note.summary}
+          />
         ))}
-      </ul>
+      </IndexList>
     </>
   );
 }

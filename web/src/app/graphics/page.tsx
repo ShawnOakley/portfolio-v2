@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { graphicsExhibits, graphicsPieces } from "@/content/graphics";
-import styles from "./graphics.module.css";
+import { IndexItem, IndexList } from "@/components/site/IndexList";
 
 export const metadata: Metadata = {
   title: "Graphics",
@@ -18,31 +17,32 @@ export default function GraphicsPage() {
         viewer is the kind of 360° viewer rebuilt at YouVisit. Both are separate
         from the legal tools.
       </p>
-      <ul className={styles.list}>
+      <IndexList>
         {graphicsExhibits.map((piece) => (
-          <li key={piece.href} className={styles.item}>
-            <Link className={styles.title} href={piece.href}>
-              {piece.title}
-            </Link>
-            <p className={styles.summary}>{piece.summary}</p>
-          </li>
+          <IndexItem
+            key={piece.href}
+            href={piece.href}
+            title={piece.title}
+            summary={piece.summary}
+          />
         ))}
-      </ul>
-      <h2 className={styles.section}>Earlier experiments</h2>
+      </IndexList>
+      <h2 className="mt-site-6 font-serif text-step-1">Earlier experiments</h2>
       <p>
         These repositories are still linked. They are not embedded, and they are
         not the exhibits above.
       </p>
-      <ul className={styles.list}>
+      <IndexList>
         {graphicsPieces.map((piece) => (
-          <li key={piece.href} className={styles.item}>
-            <a className={styles.title} href={piece.href}>
-              {piece.title}
-            </a>
-            <p className={styles.summary}>{piece.summary}</p>
-          </li>
+          <IndexItem
+            key={piece.href}
+            href={piece.href}
+            title={piece.title}
+            summary={piece.summary}
+            external
+          />
         ))}
-      </ul>
+      </IndexList>
     </>
   );
 }
