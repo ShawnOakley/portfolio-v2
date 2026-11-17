@@ -16,6 +16,7 @@ const ROUTES = [
   "/notes/no-rich-text-editor",
   "/notes/where-your-key-goes",
   "/notes/why-the-engine-stays-python",
+  "/privacy-and-keys",
   "/colophon",
   "/styleguide",
 ];

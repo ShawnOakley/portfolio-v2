@@ -31,6 +31,7 @@ export const contact = {
   phoneHref: "tel:+19295078680",
   place: "Long Beach, CA",
   github: "https://github.com/ShawnOakley",
+  linkedin: "https://www.linkedin.com/in/s-oakley",
 };
 
 /** Stated once. Wording from the résumé, not a second paraphrase. */

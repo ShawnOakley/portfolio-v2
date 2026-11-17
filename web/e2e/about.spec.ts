@@ -20,4 +20,8 @@ test("about states the work, the bar status once, and how to reach him", async (
     "href",
     "https://github.com/ShawnOakley",
   );
+  await expect(page.getByRole("link", { name: "LinkedIn" })).toHaveAttribute(
+    "href",
+    "https://www.linkedin.com/in/s-oakley",
+  );
 });

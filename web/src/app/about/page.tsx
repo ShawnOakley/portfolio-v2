@@ -62,6 +62,8 @@ export default function AboutPage() {
           {contact.email}
           {" · "}
           {contact.github.replace("https://", "")}
+          {" · "}
+          {contact.linkedin.replace("https://www.", "")}
         </p>
       </header>
       <h1 className={styles.screenOnly}>About</h1>
@@ -114,6 +116,7 @@ export default function AboutPage() {
         <a href={`mailto:${contact.email}`}>{contact.email}</a>
         <a href={contact.phoneHref}>{contact.phone}</a>
         <a href={contact.github}>GitHub</a>
+        <a href={contact.linkedin}>LinkedIn</a>
         <span> {contact.place}</span>
       </p>
     </>
