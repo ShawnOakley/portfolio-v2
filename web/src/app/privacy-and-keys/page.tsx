@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Callout } from "@/components/ui/Callout";
-import styles from "./privacy.module.css";
 
 export const metadata: Metadata = {
   title: "Privacy and keys",
@@ -37,14 +36,16 @@ export default function PrivacyPage() {
         site, over TLS, and then to CourtListener or the model provider. It is
         not stored.
       </p>
-      <ol className={styles.path} aria-label="Key path">
+      <ol className="my-site-6 list-none p-0" aria-label="Key path">
         {steps.map((step, index) => (
-          <li key={step.title}>
-            <h2>
-              <span className={styles.index}>{index + 1}</span>
+          <li key={step.title} className="border-t border-rule py-site-4">
+            <h2 className="m-0 flex items-baseline gap-site-3">
+              <span className="font-sans text-step-0 text-ink-soft">
+                {index + 1}
+              </span>
               {step.title}
             </h2>
-            <p>{step.body}</p>
+            <p className="mt-site-2">{step.body}</p>
           </li>
         ))}
       </ol>

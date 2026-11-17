@@ -9,7 +9,6 @@ import { Metric } from "@/components/ui/Metric";
 import { SourceLink } from "@/components/ui/SourceLink";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { STATUS_KEYS } from "@/lib/status";
-import styles from "./styleguide.module.css";
 
 export const metadata: Metadata = {
   title: "Style guide",
@@ -30,6 +29,9 @@ const COLORS = [
 
 const STEPS = [5, 4, 3, 2, 1, 0, -1];
 
+const section = "mt-site-7";
+const heading = "mb-site-4 text-step-2";
+
 export default function StyleGuide() {
   return (
     <>
@@ -39,13 +41,13 @@ export default function StyleGuide() {
         checks. The examples are illustrative and are not results.
       </p>
 
-      <section className={`wide ${styles.section}`}>
-        <h2>Color</h2>
-        <ul className={styles.swatches}>
+      <section className={`wide ${section}`}>
+        <h2 className={heading}>Color</h2>
+        <ul className="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-site-3 p-0 text-step-small">
           {COLORS.map((name) => (
             <li key={name}>
               <div
-                className={styles.swatch}
+                className="mb-site-1 h-12 rounded-site border border-rule"
                 style={{ background: `var(--${name})` }}
               />
               {name}
@@ -54,27 +56,31 @@ export default function StyleGuide() {
         </ul>
       </section>
 
-      <section className={`${styles.section} ${styles.scale}`}>
-        <h2>Type scale</h2>
+      <section className={section}>
+        <h2 className={heading}>Type scale</h2>
         {STEPS.map((step) => (
-          <p key={step} style={{ fontSize: `var(--step-${step})` }}>
+          <p
+            key={step}
+            className="mb-site-2 font-serif leading-[1.2]"
+            style={{ fontSize: `var(--step-${step})` }}
+          >
             Step {step}: 678 F. Supp. 3d 443
           </p>
         ))}
       </section>
 
-      <section className={`wide ${styles.section}`}>
-        <h2>Status chips</h2>
-        <div className={styles.row}>
+      <section className={`wide ${section}`}>
+        <h2 className={heading}>Status chips</h2>
+        <div className="flex flex-wrap items-start gap-x-site-4 gap-y-site-3">
           {STATUS_KEYS.map((status) => (
             <StatusChip key={status} status={status} />
           ))}
         </div>
       </section>
 
-      <section className={styles.section}>
-        <h2>AI badge</h2>
-        <div className={styles.stack}>
+      <section className={section}>
+        <h2 className={heading}>AI badge</h2>
+        <div className="[&>*+*]:mt-site-4">
           <p>
             <AiBadge />
           </p>
@@ -84,8 +90,8 @@ export default function StyleGuide() {
         </div>
       </section>
 
-      <section className={styles.section}>
-        <h2>Source link</h2>
+      <section className={section}>
+        <h2 className={heading}>Source link</h2>
         <p>
           <SourceLink href="https://www.courtlistener.com/docket/63107798/mata-v-avianca-inc/">
             Docket, Mata v. Avianca, Inc.
@@ -93,25 +99,27 @@ export default function StyleGuide() {
         </p>
       </section>
 
-      <section className={`wide ${styles.section}`}>
-        <h2>Metric</h2>
-        <div className={styles.row}>
+      <section className={`wide ${section}`}>
+        <h2 className={heading}>Metric</h2>
+        <div className="flex flex-wrap items-start gap-x-site-4 gap-y-site-3">
           <Metric label="Example at 50 items" successes={45} n={50} />
           <Metric label="Example at 500 items" successes={450} n={500} />
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.stack}`}>
-        <h2>Callouts</h2>
-        <Callout>A plain note.</Callout>
-        <Callout kind="limit">Something the tool does not do.</Callout>
-        <Callout kind="illustration">
-          This example was written by hand to explain an idea.
-        </Callout>
+      <section className={section}>
+        <h2 className={heading}>Callouts</h2>
+        <div className="[&>*+*]:mt-site-4">
+          <Callout>A plain note.</Callout>
+          <Callout kind="limit">Something the tool does not do.</Callout>
+          <Callout kind="illustration">
+            This example was written by hand to explain an idea.
+          </Callout>
+        </div>
       </section>
 
-      <section className={styles.section}>
-        <h2>Annotated text</h2>
+      <section className={section}>
+        <h2 className={heading}>Annotated text</h2>
         <p>
           <AnnotatedText
             label="Example citation"
@@ -134,8 +142,8 @@ export default function StyleGuide() {
         </p>
       </section>
 
-      <section className={styles.section}>
-        <h2>Document frame</h2>
+      <section className={section}>
+        <h2 className={heading}>Document frame</h2>
         <DocumentFrame
           label="Sample filing text"
           lines={[
@@ -151,13 +159,13 @@ export default function StyleGuide() {
         />
       </section>
 
-      <section className={styles.section}>
-        <h2>Code block</h2>
+      <section className={section}>
+        <h2 className={heading}>Code block</h2>
         <CodeBlock label="Install">{"pip install citecheck"}</CodeBlock>
       </section>
 
-      <section className={styles.section}>
-        <h2>Figure</h2>
+      <section className={section}>
+        <h2 className={heading}>Figure</h2>
         <Figure caption="A figure holds a diagram or chart and its caption.">
           <p>Figure content</p>
         </Figure>
