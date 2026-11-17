@@ -9,5 +9,5 @@ test("the citation checker page states what it asks of a filing", async ({
   await expect(page.getByText("Does the case exist?")).toBeVisible();
   await expect(
     page.getByRole("link", { name: "design notes" }),
-  ).toHaveAttribute("href", "/notes");
+  ).toHaveAttribute("href", "/notes/design");
 });

@@ -36,9 +36,9 @@ export default function CiteCheckerPage() {
         ))}
       </ul>
       <p className="mt-site-6 text-ink-soft">
-        Until it ships, the <Link href="/notes">design notes</Link> record the
-        decisions behind it. <Link href="/learn">Learn</Link> is separate, and
-        it does not describe the tool.
+        Until it ships, the <Link href="/notes/design">design notes</Link>{" "}
+        record the decisions behind it. <Link href="/learn">Learn</Link> is
+        separate, and it does not describe the tool.
       </p>
     </>
   );

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { listNotes } from "@/lib/notes";
 import { IndexItem, IndexList } from "@/components/site/IndexList";
 
 export const metadata: Metadata = {
@@ -8,8 +7,7 @@ export const metadata: Metadata = {
     "Design notes record decisions. The colophon records how the site is built.",
 };
 
-export default async function NotesPage() {
-  const notes = await listNotes();
+export default function NotesPage() {
   return (
     <>
       <h1>Notes</h1>
@@ -19,18 +17,15 @@ export default async function NotesPage() {
       </p>
       <IndexList>
         <IndexItem
+          href="/notes/design"
+          title="Design notes"
+          summary="One decision, why it was made, and what was rejected."
+        />
+        <IndexItem
           href="/colophon"
           title="Colophon"
           summary="Stack, type, color, and tests."
         />
-        {notes.map((note) => (
-          <IndexItem
-            key={note.slug}
-            href={`/notes/${note.slug}`}
-            title={note.title}
-            summary={note.summary}
-          />
-        ))}
       </IndexList>
     </>
   );

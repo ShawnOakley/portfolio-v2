@@ -26,7 +26,7 @@ export default async function NotePage({ params }: PageProps<"/notes/[slug]">) {
   return (
     <>
       <p className="mb-site-5 text-step-small">
-        <Link href="/notes">All design notes</Link>
+        <Link href="/notes/design">All design notes</Link>
       </p>
       <Note />
     </>

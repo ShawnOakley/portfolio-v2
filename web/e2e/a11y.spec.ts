@@ -14,6 +14,7 @@ const ROUTES = [
   "/learn/citation-failures",
   "/learn/evaluation",
   "/notes",
+  "/notes/design",
   "/notes/no-rich-text-editor",
   "/notes/where-your-key-goes",
   "/notes/why-the-engine-stays-python",
