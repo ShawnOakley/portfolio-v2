@@ -6,7 +6,7 @@ test("graphics lists the two viewers and the older experiments", async ({
   await page.goto("/");
   await page.getByRole("link", { name: "Graphics", exact: true }).click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Graphics");
-  await expect(page.getByText("work from Hover")).toBeVisible();
+  await expect(page.getByText("Two viewers.")).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Gaussian splats" }),
   ).toHaveAttribute("href", "/graphics/splats");
