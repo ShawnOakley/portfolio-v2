@@ -5,6 +5,7 @@ import { expect, test } from "@playwright/test";
 const ROUTES = [
   "/",
   "/about",
+  "/cite-checker",
   "/graphics",
   "/graphics/splats",
   "/graphics/projection",
@@ -16,7 +17,6 @@ const ROUTES = [
   "/notes/no-rich-text-editor",
   "/notes/where-your-key-goes",
   "/notes/why-the-engine-stays-python",
-  "/privacy-and-keys",
   "/colophon",
   "/styleguide",
 ];

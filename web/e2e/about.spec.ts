@@ -1,18 +1,51 @@
 import { expect, test } from "@playwright/test";
 
-test("about states the work, the bar status once, and how to reach him", async ({
-  page,
-}) => {
+test("about states the work and how to reach him", async ({ page }) => {
   await page.goto("/about");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("About");
+  await expect(page.locator("main .lede")).toHaveText(
+    "I trained and practiced as a lawyer, then spent ten years as a software engineer. These are the parts of that work the tools come from.",
+  );
+  await expect(page.getByRole("heading", { name: "Additional" })).toHaveCount(
+    0,
+  );
+  await expect(page.getByRole("heading", { name: "Experience" })).toHaveCount(
+    0,
+  );
+  const law = page.getByRole("button", { name: /^Law\b/ });
+  await expect(law).toHaveAttribute("aria-expanded", "false");
   await expect(
-    page.getByRole("link", { name: "Cite-checker" }),
-  ).toHaveAttribute("href", "/");
+    page.getByRole("heading", {
+      name: "Volunteer, unlawful detainer answer clinic",
+    }),
+  ).toHaveCount(0);
+
+  const legal = page.getByRole("main").getByRole("link", { name: "Legal AI" });
+  await expect(legal).toHaveCount(1);
+  await expect(legal).toHaveAttribute("href", "/cite-checker");
+  const graphics = page
+    .getByRole("main")
+    .getByRole("link", { name: "Graphics", exact: true });
+  await expect(graphics).toHaveCount(1);
+  await expect(graphics).toHaveAttribute("href", "/graphics");
+
+  await law.click();
+  await expect(law).toHaveAttribute("aria-expanded", "true");
+  await expect(legal).toHaveCount(2);
+  await expect(legal.nth(1)).toHaveAttribute("href", "/cite-checker");
+  await expect(graphics).toHaveCount(2);
+  await expect(graphics.nth(1)).toHaveAttribute("href", "/graphics");
+  await expect(
+    page.getByRole("heading", {
+      name: "Volunteer, unlawful detainer answer clinic",
+    }),
+  ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "This site" }).first(),
   ).toHaveAttribute("href", "/colophon");
-  const bar = page.getByText("New York bar admission: inactive.");
-  await expect(bar).toHaveCount(1);
+  await expect(page.getByText("New York bar admission: inactive.")).toHaveCount(
+    0,
+  );
   await expect(
     page.getByRole("link", { name: "shawnoakley@gmail.com" }),
   ).toBeVisible();
@@ -23,5 +56,10 @@ test("about states the work, the bar status once, and how to reach him", async (
   await expect(page.getByRole("link", { name: "LinkedIn" })).toHaveAttribute(
     "href",
     "https://www.linkedin.com/in/s-oakley",
+  );
+
+  await page.getByRole("button", { name: /Paul Hastings/ }).click();
+  await expect(page.getByRole("status")).toContainText(
+    "Scientific resource on Hatch-Waxman",
   );
 });

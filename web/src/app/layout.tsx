@@ -7,11 +7,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Shawn Oakley: legal-AI software",
+    default: "Shawn Oakley",
     template: "%s | Shawn Oakley",
   },
-  description:
-    "Open-source legal-AI tools and how they work. Software, not legal services.",
+  description: "Portfolio of software projects. Software, not legal services.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

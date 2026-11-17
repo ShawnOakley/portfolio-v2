@@ -143,7 +143,11 @@ export default function StyleGuide() {
       </section>
 
       <section className={section}>
-        <h2 className={heading}>Document frame</h2>
+        <h2 className="mb-site-2 text-step-2">Document frame</h2>
+        <p className="mb-site-4">
+          A filing uses this frame: document type and numbered lines. A Learn
+          page stays prose and has no line numbers.
+        </p>
         <DocumentFrame
           label="Sample filing text"
           lines={[

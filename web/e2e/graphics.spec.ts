@@ -4,7 +4,10 @@ test("graphics lists the two viewers and the older experiments", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Graphics", exact: true }).click();
+  await page
+    .getByRole("main")
+    .getByRole("link", { name: "Graphics", exact: true })
+    .click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Graphics");
   await expect(page.getByText("Two viewers.")).toBeVisible();
   await expect(

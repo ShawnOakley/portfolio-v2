@@ -1,21 +1,24 @@
 import { expect, test } from "@playwright/test";
 
-test("home page states what the software does, with the disclaimer", async ({
+test("home page introduces the portfolio, with the disclaimer", async ({
   page,
 }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "checks a brief’s citations",
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Shawn Oakley",
   );
+  await expect(page.locator("main .lede")).toHaveText(
+    "A portfolio of software projects.",
+  );
+  await expect(
+    page.getByRole("main").getByRole("link", { name: "Legal AI" }),
+  ).toHaveAttribute("href", "/cite-checker");
+  await expect(
+    page.getByRole("main").getByRole("link", { name: "Graphics", exact: true }),
+  ).toBeVisible();
   await expect(page.getByRole("contentinfo")).toContainText(
     "Not legal services or legal advice",
   );
-});
-
-test("footer degrades when the API is not running", async ({ page }) => {
-  // The web app is tested alone here; /api/health has no backend behind it.
-  await page.goto("/");
-  await expect(page.getByTestId("engine-version")).toHaveText(
-    "engine: unavailable",
-  );
+  await expect(page.getByRole("contentinfo")).not.toContainText("engine:");
+  await expect(page.getByRole("contentinfo")).not.toContainText("Long Beach");
 });

@@ -1,8 +1,9 @@
 # site
 
-Portfolio site for a series of open-source legal-AI tools. A Next.js front end
-(`web/`) and a thin FastAPI service (`api/`) that will wrap the `citecheck`
-engine, deployed together as one Vercel project.
+Portfolio of software projects. One of them is an open-source legal citation
+checker, still in progress. A Next.js front end (`web/`) and a thin FastAPI
+service (`api/`) that will wrap the `citecheck` engine, deployed together as
+one Vercel project.
 
 This is software. It is not legal services or legal advice.
 

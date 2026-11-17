@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { argument, barStatus, roles } from "./resume";
+import { argument, roles } from "./resume";
 
 describe("resume", () => {
   it("gives every role a year and a single outcome line", () => {
@@ -10,28 +10,17 @@ describe("resume", () => {
     }
   });
 
-  it("keeps bar status to one sentence", () => {
-    expect(barStatus).toBe("New York bar admission: inactive.");
-    expect(barStatus.match(/\./g)).toHaveLength(1);
-  });
-
-  it("ties the four practices to the work they explain", () => {
+  it("ties the practices to the work they explain", () => {
     expect(argument.map((item) => item.explains.label)).toEqual([
-      "Hatch-Waxman tracker",
-      "Cite-checker",
-      "Sourcing every fact",
+      "Legal AI",
+      "Graphics",
       "This site",
     ]);
     const linked = new Set(
       roles.flatMap((role) => (role.explains ? [role.explains.label] : [])),
     );
     expect(linked).toEqual(
-      new Set([
-        "This site",
-        "Hatch-Waxman tracker",
-        "Sourcing every fact",
-        "Gaussian splats",
-      ]),
+      new Set(["This site", "Legal AI", "Graphics", "Gaussian splats"]),
     );
   });
 });
