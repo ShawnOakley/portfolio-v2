@@ -1,211 +1,259 @@
+@import "tailwindcss";
 @import "../styles/tokens.css";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-ui);
-  font-size: var(--step-0);
-  line-height: var(--leading-ui);
-  font-synthesis: none;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-doc);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-  margin: 0;
-}
-
-p {
-  margin: 0;
-  text-wrap: pretty;
-}
-
-a {
-  color: var(--accent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
-}
-
-a:hover {
-  text-decoration-thickness: 2px;
-}
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: var(--radius);
-}
-
-::selection {
-  background: var(--highlight);
-  color: var(--highlight-ink);
-}
-
-code,
-pre {
-  font-family: var(--font-mono);
-  font-size: 0.92em;
-}
-
 /*
- * Page frame. The double rule down the left is the margin line of pleading
- * paper. Content hangs from it, left-aligned, at a reading measure.
+ * Brand tokens stay in tokens.css, including light-dark().
+ * Inline theme entries point Tailwind utilities at those variables:
+ * bg-paper, text-ink, border-rule, font-sans, font-serif.
  */
-.page {
-  flex: 1;
-  width: 100%;
-  padding: var(--space-7) var(--gutter) var(--space-8) var(--margin-rule);
-  border-left: 3px double var(--rule-strong);
-  margin-left: var(--gutter);
-  max-width: calc(100% - var(--gutter));
+@theme inline {
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-doc);
+  --font-mono: var(--font-mono);
+
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-highlight: var(--highlight);
+  --color-highlight-ink: var(--highlight-ink);
+
+  --color-found: var(--found);
+  --color-found-tint: var(--found-tint);
+  --color-not-found: var(--not-found);
+  --color-not-found-tint: var(--not-found-tint);
+  --color-ambiguous: var(--ambiguous);
+  --color-ambiguous-tint: var(--ambiguous-tint);
+  --color-mismatch: var(--mismatch);
+  --color-mismatch-tint: var(--mismatch-tint);
+  --color-questionable: var(--questionable);
+  --color-questionable-tint: var(--questionable-tint);
+  --color-treatment: var(--treatment);
+  --color-treatment-tint: var(--treatment-tint);
+  --color-unchecked: var(--unchecked);
+  --color-unchecked-tint: var(--unchecked-tint);
 }
 
-.page > * {
-  max-width: var(--measure);
-}
-
-.page > .wide {
-  max-width: 68rem;
-}
-
-h1 + .lede {
-  margin-top: var(--space-4);
-}
-
-.page > h1 {
-  font-size: var(--step-4);
-}
-
-.lede {
-  font-family: var(--font-doc);
-  font-size: var(--step-1);
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-
-/* Long-form text: notes, colophon, explainers. */
-.prose {
-  font-family: var(--font-doc);
-  font-size: 1.0625rem;
-  line-height: var(--leading-doc);
-}
-
-.prose > * + * {
-  margin-top: var(--space-4);
-}
-
-.prose h1 {
-  font-size: var(--step-4);
-  margin-bottom: var(--space-5);
-}
-
-.prose h2 {
-  font-size: var(--step-2);
-  margin-top: var(--space-7);
-}
-
-.prose h3 {
-  font-size: var(--step-1);
-  margin-top: var(--space-6);
-}
-
-.prose ul,
-.prose ol {
-  padding-left: 1.25em;
-  margin-bottom: 0;
-}
-
-.prose li + li {
-  margin-top: var(--space-2);
-}
-
-.prose strong {
-  font-weight: 650;
-}
-
-.prose code {
-  background: var(--unchecked-tint);
-  padding: 0.1em 0.3em;
-  border-radius: var(--radius);
-}
-
-.prose table {
-  border-collapse: collapse;
-  font-family: var(--font-ui);
-  font-size: var(--step--1);
-  width: 100%;
-}
-
-.prose th,
-.prose td {
-  text-align: left;
-  padding: var(--space-2) var(--space-3) var(--space-2) 0;
-  border-bottom: 1px solid var(--rule);
-  vertical-align: top;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-@media print {
-  header,
-  footer {
-    display: none;
-  }
-
-  body {
-    background: white;
-    color: black;
-  }
-
-  .page {
-    border: none;
-    margin: 0;
-    padding: 0;
-    max-width: none;
-  }
-
-  .page > * {
-    max-width: none;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
+@layer base {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-ui);
+    font-size: var(--step-0);
+    line-height: var(--leading-ui);
+    font-synthesis: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-doc);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  ::selection {
+    background: var(--highlight);
+    color: var(--highlight-ink);
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+  }
+
+  /*
+ * Page frame. The double rule down the left is the margin line of pleading
+ * paper. Content hangs from it, left-aligned, at a reading measure.
+ */
+  .page {
+    flex: 1;
+    width: 100%;
+    padding: var(--space-7) var(--gutter) var(--space-8) var(--margin-rule);
+    border-left: 3px double var(--rule-strong);
+    margin-left: var(--gutter);
+    max-width: calc(100% - var(--gutter));
+  }
+
+  .page > * {
+    max-width: var(--measure);
+  }
+
+  .page > .wide {
+    max-width: 68rem;
+  }
+
+  h1 + .lede {
+    margin-top: var(--space-4);
+  }
+
+  .page > h1 {
+    font-size: var(--step-4);
+  }
+
+  .lede {
+    font-family: var(--font-doc);
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  /* Long-form text: notes, colophon, explainers. */
+  .prose {
+    font-family: var(--font-doc);
+    font-size: 1.0625rem;
+    line-height: var(--leading-doc);
+  }
+
+  .prose > * + * {
+    margin-top: var(--space-4);
+  }
+
+  .prose h1 {
+    font-size: var(--step-4);
+    margin-bottom: var(--space-5);
+  }
+
+  .prose h2 {
+    font-size: var(--step-2);
+    margin-top: var(--space-7);
+  }
+
+  .prose h3 {
+    font-size: var(--step-1);
+    margin-top: var(--space-6);
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.25em;
+    margin-bottom: 0;
+  }
+
+  .prose ul {
+    list-style: disc;
+  }
+
+  .prose ol {
+    list-style: decimal;
+  }
+
+  .prose li + li {
+    margin-top: var(--space-2);
+  }
+
+  .prose strong {
+    font-weight: 650;
+  }
+
+  .prose code {
+    background: var(--unchecked-tint);
+    padding: 0.1em 0.3em;
+    border-radius: var(--radius);
+  }
+
+  .prose table {
+    border-collapse: collapse;
+    font-family: var(--font-ui);
+    font-size: var(--step--1);
+    width: 100%;
+  }
+
+  .prose th,
+  .prose td {
+    text-align: left;
+    padding: var(--space-2) var(--space-3) var(--space-2) 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media print {
+    header,
+    footer {
+      display: none;
+    }
+
+    body {
+      background: white;
+      color: black;
+    }
+
+    .page {
+      border: none;
+      margin: 0;
+      padding: 0;
+      max-width: none;
+    }
+
+    .page > * {
+      max-width: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

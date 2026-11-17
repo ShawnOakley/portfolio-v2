@@ -29,6 +29,7 @@
     "@axe-core/playwright": "^4.14.0",
     "@lhci/cli": "^0.16.1",
     "@playwright/test": "^1.65.1",
+    "@tailwindcss/postcss": "^4.3.5",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@types/mdx": "^2.0.14",
@@ -39,7 +40,9 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "jsdom": "^31.0.1",
+    "postcss": "^8.5.33",
     "prettier": "^3.10.1",
+    "tailwindcss": "^4.3.5",
     "typescript": "^5",
     "vitest": "^5.1.0"
   },
