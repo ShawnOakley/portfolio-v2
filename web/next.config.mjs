@@ -11,6 +11,18 @@ const nextConfig = {
   // it on an unknown /notes/[slug] streams a shell with status 200 instead of
   // returning a 404. Revisit if a page ever needs per-request data.
   pageExtensions: ["ts", "tsx", "mdx"],
+  // The card reads these files with readFile. Tracing has to be told, or the
+  // production function ships without the fonts.
+  outputFileTracingIncludes: {
+    "/opengraph-image": [
+      "./node_modules/@fontsource/literata/files/literata-latin-600-normal.woff",
+      "./node_modules/@fontsource/public-sans/files/public-sans-latin-400-normal.woff",
+    ],
+    "/twitter-image": [
+      "./node_modules/@fontsource/literata/files/literata-latin-600-normal.woff",
+      "./node_modules/@fontsource/public-sans/files/public-sans-latin-400-normal.woff",
+    ],
+  },
   async redirects() {
     return [{ source: "/", destination: "/about", permanent: false }];
   },
