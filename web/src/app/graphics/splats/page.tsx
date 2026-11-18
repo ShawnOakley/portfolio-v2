@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackLink } from "@/components/site/BackLink";
 import { SplatViewer } from "./SplatViewer";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function SplatsPage() {
   return (
     <>
+      <BackLink href="/graphics" label="Back to Graphics" />
       <h1>Gaussian splats</h1>
       <p className="lede">
         Gaussian splatting is work from Hover, on the web modeling tools. This

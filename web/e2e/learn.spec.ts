@@ -22,6 +22,8 @@ test("citation failures uses the public opinion and does not discuss the lawyers
   ).toHaveAttribute("href", /justia\.com/);
   await expect(page.locator("body")).not.toContainText("Schwartz");
   await expect(page.locator("body")).not.toContainText("LoDuca");
+  await page.getByRole("link", { name: "Back to Learn" }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Learn");
 });
 
 test("the evaluation counts can be changed from the keyboard", async ({

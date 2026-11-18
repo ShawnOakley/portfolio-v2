@@ -32,4 +32,12 @@ test("the splat page credits Hover and the lion scan", async ({ page }) => {
     "href",
     "https://superspl.at/user?id=rohls",
   );
+  await page.getByRole("link", { name: "Back to Graphics" }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Graphics");
+});
+
+test("the projection page returns to the graphics index", async ({ page }) => {
+  await page.goto("/graphics/projection");
+  await page.getByRole("link", { name: "Back to Graphics" }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Graphics");
 });

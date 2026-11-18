@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackLink } from "@/components/site/BackLink";
 import { IndexItem, IndexList } from "@/components/site/IndexList";
 import { listNotes } from "@/lib/notes";
 
@@ -11,6 +12,7 @@ export default async function DesignNotesPage() {
   const notes = await listNotes();
   return (
     <>
+      <BackLink href="/notes" label="Back to Notes" />
       <h1>Design notes</h1>
       <p className="lede">
         Each note records one decision, the reason for it, and what was

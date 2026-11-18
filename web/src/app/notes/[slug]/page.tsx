@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BackLink } from "@/components/site/BackLink";
 import { listNotes } from "@/lib/notes";
 
 // Only the notes that exist are routes; anything else is a real 404.
@@ -25,9 +25,7 @@ export default async function NotePage({ params }: PageProps<"/notes/[slug]">) {
   const { default: Note } = await import(`@/content/notes/${slug}.mdx`);
   return (
     <>
-      <p className="mb-site-5 text-step-small">
-        <Link href="/notes/design">All design notes</Link>
-      </p>
+      <BackLink href="/notes/design" label="Back to Design notes" />
       <Note />
     </>
   );

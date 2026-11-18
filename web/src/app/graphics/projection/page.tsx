@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackLink } from "@/components/site/BackLink";
 import { ProjectionViewer } from "./ProjectionViewer";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function ProjectionPage() {
   return (
     <>
+      <BackLink href="/graphics" label="Back to Graphics" />
       <h1>Projection viewer</h1>
       <p className="lede">
         The photograph is projected from the camera that took it. Move off that

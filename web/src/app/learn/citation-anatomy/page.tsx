@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackLink } from "@/components/site/BackLink";
 import { Callout } from "@/components/ui/Callout";
 import { CitationPassage } from "./CitationPassage";
 
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function CitationAnatomyPage() {
   return (
     <>
+      <BackLink href="/learn" label="Back to Learn" />
       <h1>Citation anatomy</h1>
       <p className="lede">
         A full citation names the case and the page where it is printed. A short

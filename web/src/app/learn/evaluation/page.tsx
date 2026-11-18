@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackLink } from "@/components/site/BackLink";
 import { Callout } from "@/components/ui/Callout";
 import { Matrix } from "./Matrix";
 
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function EvaluationPage() {
   return (
     <>
+      <BackLink href="/learn" label="Back to Learn" />
       <h1>Evaluation</h1>
       <p className="lede">
         Precision is the share of predicted yeses that were actually yes. Recall
