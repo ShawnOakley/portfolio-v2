@@ -57,9 +57,9 @@ test("about states the work and how to reach him", async ({ page }) => {
   await expect(page.getByText("New York bar admission: inactive.")).toHaveCount(
     0,
   );
-  await expect(
-    page.getByRole("link", { name: "shawnoakley@gmail.com" }),
-  ).toBeVisible();
+  const email = page.getByRole("link", { name: "Email", exact: true });
+  await expect(email).toBeVisible();
+  await expect(email).toHaveAttribute("href", "mailto:shawnoakley@gmail.com");
   await expect(page.getByRole("link", { name: "GitHub" })).toHaveAttribute(
     "href",
     "https://github.com/ShawnOakley",

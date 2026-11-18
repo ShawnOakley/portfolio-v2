@@ -46,13 +46,21 @@ export default function AboutPage() {
 
       <CurrentProjects items={argument} />
 
-      <h2 className={`${styles.section} mt-site-7 text-step-2`}>Contact</h2>
-      <p className="mt-site-4 [&_a+a]:ml-site-4">
-        <a href={`mailto:${contact.email}`}>{contact.email}</a>
-        <a href={contact.phoneHref}>{contact.phone}</a>
-        <a href={contact.github}>GitHub</a>
-        <a href={contact.linkedin}>LinkedIn</a>
-      </p>
+      <div className="mt-site-7 flex flex-wrap items-center gap-x-site-4 gap-y-site-2">
+        <h2 className={`${styles.section} text-step-2`}>Contact</h2>
+        <p className="print:hidden [&_a+a]:ml-site-4">
+          <a href={`mailto:${contact.email}`}>Email</a>
+          <a href={contact.phoneHref}>{contact.phone}</a>
+          <a href={contact.github}>GitHub</a>
+          <a href={contact.linkedin}>LinkedIn</a>
+        </p>
+        <p className="hidden print:block">
+          {contact.email}
+          {" · "}
+          {contact.phone}
+          {" · GitHub · LinkedIn"}
+        </p>
+      </div>
     </>
   );
 }
