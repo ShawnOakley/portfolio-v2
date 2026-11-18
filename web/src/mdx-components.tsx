@@ -12,6 +12,11 @@ const components: MDXComponents = {
   Metric,
   SourceLink,
   StatusChip,
+  table: (props) => (
+    <div className="overflow-x-auto">
+      <table {...props} />
+    </div>
+  ),
   wrapper: ({ children }) => <article className="prose">{children}</article>,
 };
 

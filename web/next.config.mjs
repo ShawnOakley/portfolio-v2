@@ -21,4 +21,8 @@ const nextConfig = {
   },
 };
 
-export default createMDX()(nextConfig);
+export default createMDX({
+  options: {
+    remarkPlugins: ["remark-gfm"],
+  },
+})(nextConfig);
