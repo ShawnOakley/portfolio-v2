@@ -159,7 +159,8 @@ export const experience: Role[] = [
     location: "",
     dates: "2020 – 2022",
     lane: "Teaching",
-    outcome: "Placeholder. The description of this role is not written yet.",
+    outcome:
+      "Aided in the implementation and instruction of JavaScript. Conducted office hours, helped devise lesson plans, and answered student questions in and outside of class.",
   },
   {
     title: "Attorney, life sciences group",
