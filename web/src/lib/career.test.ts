@@ -36,7 +36,21 @@ describe("career dates", () => {
     const software = layout.placed.filter((item) => item.lane === "Software");
     expect(software.every((item) => item.row === 0)).toBe(true);
     expect(layout.lanes[0]?.lane).toBe("Education");
-    expect(layout.domain[0].toISOString()).toBe("2005-01-01T00:00:00.000Z");
+    const lawDegree = layout.placed.find(
+      (item) => item.role.title === "J.D. and LL.M.",
+    );
+    expect(lawDegree?.start.toISOString()).toBe("2006-01-01T00:00:00.000Z");
+    expect(lawDegree?.end.toISOString()).toBe("2010-01-01T00:00:00.000Z");
+    const bioinformatics = layout.placed.find(
+      (item) => item.role.title === "M.S., Bioinformatics",
+    );
+    expect(lawDegree?.row).not.toBe(bioinformatics?.row);
+    const brown = layout.placed.find(
+      (item) => item.role.title === "B.S., Neuroscience",
+    );
+    expect(brown?.start.toISOString()).toBe("2002-01-01T00:00:00.000Z");
+    expect(brown?.end.toISOString()).toBe("2006-01-01T00:00:00.000Z");
+    expect(layout.domain[0].toISOString()).toBe("2002-01-01T00:00:00.000Z");
     expect(
       layout.placed.find((item) => item.role.organization === "Thinkful")?.lane,
     ).toBe("Teaching");

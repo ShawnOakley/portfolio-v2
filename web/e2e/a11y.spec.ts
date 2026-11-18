@@ -3,7 +3,6 @@ import { expect, test } from "@playwright/test";
 
 /** Every route that exists. Add new routes here when they ship. */
 const ROUTES = [
-  "/",
   "/about",
   "/cite-checker",
   "/graphics",

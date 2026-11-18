@@ -1,20 +1,19 @@
 import { expect, test } from "@playwright/test";
 
-test("home page introduces the portfolio, with the disclaimer", async ({
-  page,
-}) => {
+test("the root opens the résumé", async ({ page }) => {
+  const response = await page.request.get("/", { maxRedirects: 0 });
+  expect(response.status()).toBe(307);
+  expect(response.headers().location).toMatch(/\/about$/);
+
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Shawn Oakley",
-  );
-  await expect(page.locator("main .lede")).toHaveText(
-    "A portfolio of software projects.",
+  await expect(page).toHaveURL(/\/about$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("About");
+  await expect(page.getByRole("link", { name: "About" })).toHaveAttribute(
+    "aria-current",
+    "page",
   );
   await expect(
-    page.getByRole("main").getByRole("link", { name: "Legal AI" }),
-  ).toHaveAttribute("href", "/cite-checker");
-  await expect(
-    page.getByRole("main").getByRole("link", { name: "Graphics", exact: true }),
+    page.getByRole("heading", { name: "Career and Education" }),
   ).toBeVisible();
   await expect(page.getByRole("contentinfo")).toContainText(
     "Not legal services or legal advice",

@@ -1,3 +1,5 @@
+import { siteName } from "@/lib/site";
+
 /**
  * One source for the About page and the printed résumé.
  * Dates and outcomes are compressed from the 2026-11-05 résumé.
@@ -27,11 +29,14 @@ export type Role = {
 export type School = {
   institution: string;
   credential: string;
+  /** Graduation year, shown in the list. */
   year: string;
+  /** Chart range when the program runs longer than the graduation year. */
+  span?: string;
 };
 
 export const contact = {
-  name: "Shawn Oakley",
+  name: siteName,
   email: "shawnoakley@gmail.com",
   phone: "(929) 507-8680",
   phoneHref: "tel:+19295078680",
@@ -220,6 +225,7 @@ export const education: School[] = [
       "Columbia University and the School of Oriental and African Studies",
     credential: "J.D. and LL.M.",
     year: "2009",
+    span: "2006 – 2009",
   },
   {
     institution: "New York University",
@@ -230,6 +236,7 @@ export const education: School[] = [
     institution: "Brown University",
     credential: "B.S., Neuroscience",
     year: "2005",
+    span: "2002 – 2005",
   },
 ];
 

@@ -106,18 +106,21 @@ export function laneBlock(rows: number): number {
 }
 
 export function layoutCareer(roles: Role[], schools: School[], asOf: Date) {
-  const education = schools.map((school) => ({
-    role: {
-      title: school.credential,
-      organization: school.institution,
-      location: "",
-      dates: school.year,
-      lane: "Law" as const,
-      outcome: school.credential,
-    },
-    lane: "Education" as const,
-    ...parseDates(`${school.year} – ${school.year}`, asOf),
-  }));
+  const education = schools.map((school) => {
+    const dates = school.span ?? school.year;
+    return {
+      role: {
+        title: school.credential,
+        organization: school.institution,
+        location: "",
+        dates,
+        lane: "Law" as const,
+        outcome: school.credential,
+      },
+      lane: "Education" as const,
+      ...parseDates(school.span ?? `${school.year} – ${school.year}`, asOf),
+    };
+  });
   const parsed = [
     ...education,
     ...roles.map((role) => ({

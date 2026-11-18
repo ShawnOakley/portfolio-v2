@@ -1,7 +1,13 @@
 import { expect, test } from "@playwright/test";
+import { resumePdfPath } from "../src/lib/site";
 
 test("about states the work and how to reach him", async ({ page }) => {
   await page.goto("/about");
+  const download = page.getByRole("link", { name: "Download Resume" });
+  await expect(download).toHaveAttribute("href", resumePdfPath);
+  const pdf = await page.request.get(resumePdfPath);
+  expect(pdf.ok()).toBeTruthy();
+  expect(pdf.headers()["content-type"] ?? "").toContain("pdf");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("About");
   await expect(page.locator("main .lede")).toHaveText(
     "I trained and practiced as a lawyer, then spent ten years as a software engineer. These are the parts of that work the tools come from.",
@@ -14,6 +20,8 @@ test("about states the work and how to reach him", async ({ page }) => {
   );
   const law = page.getByRole("button", { name: /^Law\b/ });
   await expect(law).toHaveAttribute("aria-expanded", "false");
+  const projects = page.getByRole("button", { name: "Current Projects" });
+  await expect(projects).toHaveAttribute("aria-expanded", "false");
   await expect(
     page.getByRole("heading", {
       name: "Volunteer, unlawful detainer answer clinic",
@@ -21,11 +29,14 @@ test("about states the work and how to reach him", async ({ page }) => {
   ).toHaveCount(0);
 
   const legal = page.getByRole("main").getByRole("link", { name: "Legal AI" });
-  await expect(legal).toHaveCount(1);
-  await expect(legal).toHaveAttribute("href", "/cite-checker");
   const graphics = page
     .getByRole("main")
     .getByRole("link", { name: "Graphics", exact: true });
+  await expect(legal).toHaveCount(0);
+  await projects.click();
+  await expect(projects).toHaveAttribute("aria-expanded", "true");
+  await expect(legal).toHaveCount(1);
+  await expect(legal).toHaveAttribute("href", "/cite-checker");
   await expect(graphics).toHaveCount(1);
   await expect(graphics).toHaveAttribute("href", "/graphics");
 

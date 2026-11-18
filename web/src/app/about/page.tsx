@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import {
-  argument,
-  contact,
-  education,
-  roles,
-  type Explanation,
-} from "@/content/resume";
+import { argument, contact, education, roles } from "@/content/resume";
 import { CareerChart } from "./CareerChart";
+import { CurrentProjects } from "./CurrentProjects";
 import { DownloadPdf } from "./DownloadPdf";
 import { RoleGroups } from "./RoleGroups";
 import styles from "./about.module.css";
@@ -18,20 +12,9 @@ export const metadata: Metadata = {
     "Why Shawn Oakley builds legal-AI software, and the résumé that explains it.",
 };
 
-function ProjectName({ item }: { item: Explanation }) {
-  return item.href ? (
-    <Link href={item.href}>{item.label}</Link>
-  ) : (
-    <span>{item.label}</span>
-  );
-}
-
 export default function AboutPage() {
   return (
     <>
-      <p className="mb-site-5 print:hidden">
-        <DownloadPdf />
-      </p>
       <header className="mb-3 hidden print:block" aria-hidden="true">
         <p className={styles.printName}>{contact.name}</p>
         <p className={styles.printContact}>
@@ -52,33 +35,16 @@ export default function AboutPage() {
         engineer. These are the parts of that work the tools come from.
       </p>
       <section className="mt-site-7 print:hidden">
-        <h2 className="text-step-2">Career and Education</h2>
+        <div className="flex flex-wrap items-center gap-x-site-4 gap-y-site-2">
+          <h2 className="text-step-2">Career and Education</h2>
+          <DownloadPdf />
+        </div>
         <CareerChart roles={roles} schools={education} />
       </section>
 
       <RoleGroups roles={roles} schools={education} />
 
-      <ul
-        className={`${styles.argument} mt-site-7 list-none border-t border-rule p-0 print:hidden`}
-      >
-        {argument.map((item) => (
-          <li
-            key={item.explains.label}
-            className="border-b border-rule py-site-4"
-          >
-            <p
-              className={`${styles.project} font-serif text-step-1 font-semibold`}
-            >
-              <ProjectName item={item.explains} />
-            </p>
-            <p
-              className={`${styles.because} mt-site-1 font-serif text-ink-soft`}
-            >
-              {item.text}
-            </p>
-          </li>
-        ))}
-      </ul>
+      <CurrentProjects items={argument} />
 
       <h2 className={`${styles.section} mt-site-7 text-step-2`}>Contact</h2>
       <p className="mt-site-4 [&_a+a]:ml-site-4">

@@ -3,7 +3,8 @@ import { expect, test } from "@playwright/test";
 test("graphics lists the two viewers and the older experiments", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/about");
+  await page.getByRole("button", { name: "Current Projects" }).click();
   await page
     .getByRole("main")
     .getByRole("link", { name: "Graphics", exact: true })

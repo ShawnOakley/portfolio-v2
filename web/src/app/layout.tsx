@@ -1,16 +1,26 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
+import { siteName } from "@/lib/site";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import { literata, publicSans } from "./fonts";
 import "./globals.css";
 
+const description =
+  "Portfolio of software projects. Software, not legal services.";
+
 export const metadata: Metadata = {
+  applicationName: siteName,
   title: {
-    default: "Shawn Oakley",
-    template: "%s | Shawn Oakley",
+    default: siteName,
+    template: `%s | ${siteName}`,
   },
-  description: "Portfolio of software projects. Software, not legal services.",
+  description,
+  openGraph: {
+    siteName,
+    title: siteName,
+    description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

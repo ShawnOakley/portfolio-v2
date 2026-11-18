@@ -11,6 +11,9 @@ const nextConfig = {
   // it on an unknown /notes/[slug] streams a shell with status 200 instead of
   // returning a 404. Revisit if a page ever needs per-request data.
   pageExtensions: ["ts", "tsx", "mdx"],
+  async redirects() {
+    return [{ source: "/", destination: "/about", permanent: false }];
+  },
   async rewrites() {
     return apiOrigin
       ? [{ source: "/api/:path*", destination: `${apiOrigin}/api/:path*` }]

@@ -5,7 +5,7 @@ export default function NotFound() {
     <>
       <h1>No page at this address</h1>
       <p className="lede">
-        The link may be out of date. <Link href="/">Go to the home page</Link>.
+        The link may be out of date. <Link href="/about">Go to About</Link>.
       </p>
     </>
   );

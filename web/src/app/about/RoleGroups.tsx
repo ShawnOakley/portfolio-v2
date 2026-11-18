@@ -61,7 +61,11 @@ const groupButton =
   "flex w-full cursor-pointer items-baseline justify-between gap-x-site-4 py-site-4 text-left hover:bg-paper-raised";
 
 function degreeSpan(schools: School[]): string {
-  const years = schools.map((school) => Number(school.year));
+  const years = schools.flatMap((school) =>
+    [...(school.span ?? school.year).matchAll(/\d{4}/g)].map((match) =>
+      Number(match[0]),
+    ),
+  );
   const start = Math.min(...years);
   const end = Math.max(...years);
   return start === end ? String(start) : `${start} – ${end}`;
@@ -131,7 +135,7 @@ export function RoleGroups({
                     </span>
                   </p>
                   <p className="text-step-small text-ink-soft tabular-nums">
-                    {school.year}
+                    {school.span ?? school.year}
                   </p>
                 </li>
               ))}
@@ -201,7 +205,7 @@ export function RoleGroups({
                   </span>
                 </p>
                 <p className="text-step-small text-ink-soft tabular-nums">
-                  {school.year}
+                  {school.span ?? school.year}
                 </p>
               </li>
             ))}
