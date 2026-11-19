@@ -1,0 +1,54 @@
+{
+  "cites": [
+    {
+      "id": 0,
+      "kind": "full_case",
+      "text": "347 U.S. 483",
+      "status": "found",
+      "note": "",
+      "plaintiff": "Brown",
+      "defendant": "Board of Education",
+      "volume": "347",
+      "reporter": "U.S.",
+      "page": "483",
+      "pin_pages": [],
+      "parent_id": null,
+      "case_names": [
+        "Brown v. Board of Education"
+      ],
+      "urls": [
+        "https://www.courtlistener.com/opinion/105221/brown-v-board-of-education/"
+      ]
+    },
+    {
+      "id": 1,
+      "kind": "full_case",
+      "text": "999 U.S. 999",
+      "status": "not_found",
+      "note": "nothing at this citation, and no case by this name in CourtListener from 2019 to 2021",
+      "plaintiff": "Nobody",
+      "defendant": "Nowhere",
+      "volume": "999",
+      "reporter": "U.S.",
+      "page": "999",
+      "pin_pages": [],
+      "parent_id": null,
+      "case_names": [],
+      "urls": []
+    }
+  ],
+  "quotes": [
+    {
+      "id": 0,
+      "text": "separate educational facilities are inherently unequal.",
+      "status": "verified",
+      "note": "this version of the opinion has no page numbers, so the page wasn't checked",
+      "cite_id": 0,
+      "how": "follows",
+      "omits": false,
+      "score": 100.0,
+      "found_on": []
+    }
+  ],
+  "verdicts": []
+}
