@@ -10,6 +10,18 @@ import {
   type Report,
 } from "@/lib/citecheck";
 
+function Wait({ children }: { children: string }) {
+  return (
+    <p className="mt-site-5 flex items-start gap-site-3" role="status">
+      <span
+        className="mt-[0.2em] inline-block size-4 shrink-0 animate-spin rounded-full border-2 border-ink border-t-transparent"
+        aria-hidden="true"
+      />
+      <span>{children}</span>
+    </p>
+  );
+}
+
 export function CheckForm() {
   const [text, setText] = useState("");
   const [models, setModels] = useState<CheckModel[]>([]);
@@ -206,17 +218,13 @@ export function CheckForm() {
           supports the sentence. That part takes several minutes.
         </p>
       </form>
-      {reading ? (
-        <p className="mt-site-5" role="status">
-          Reading the PDF.
-        </p>
-      ) : null}
+      {reading ? <Wait>Reading the PDF.</Wait> : null}
       {pending ? (
-        <p className="mt-site-5" role="status">
+        <Wait>
           {askSupport
             ? "Asking the model whether each case supports the sentence. This can take several minutes."
             : "Checking citations. A short brief takes a few seconds. A long one takes longer."}
-        </p>
+        </Wait>
       ) : null}
       {error ? (
         <p className="mt-site-5" role="alert">
