@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   checkPayload,
+  extractError,
+  MAX_PDF_BYTES,
   courtListenerUrl,
   groupCites,
   groupNeedsAttention,
@@ -147,6 +149,25 @@ describe("checkPayload", () => {
       verdicts: true,
       model: "qwen3.5-9b",
     });
+  });
+});
+
+describe("extractError", () => {
+  it("uses the handoff wording for each failure", () => {
+    expect(extractError("a PDF is required")).toBe("The file is not a PDF.");
+    expect(extractError("the PDF could not be read")).toBe(
+      "The file is damaged.",
+    );
+    expect(extractError("no text could be read from this PDF")).toBe(
+      "The pages were blank, or the page range is past the end.",
+    );
+    expect(extractError("pages must look like 11-56")).toBe(
+      "The page range is not that form.",
+    );
+    expect(extractError("PDF is larger than 20 MB")).toBe(
+      "The file is over the limit.",
+    );
+    expect(MAX_PDF_BYTES).toBe(20 * 1024 * 1024);
   });
 });
 

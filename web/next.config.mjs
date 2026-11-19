@@ -7,6 +7,12 @@ const apiOrigin = process.env.API_ORIGIN;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: {
+      // A brief PDF may be up to 20 MB. The checker rejects anything larger.
+      bodySizeLimit: "21mb",
+    },
+  },
   // Cache Components is off on purpose: every page here is static, and with
   // it on an unknown /notes/[slug] streams a shell with status 200 instead of
   // returning a 404. Revisit if a page ever needs per-request data.

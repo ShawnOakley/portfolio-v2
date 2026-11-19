@@ -2,6 +2,7 @@
 
 import {
   checkPayload,
+  extractError,
   parseModels,
   parseReport,
   type CheckModel,
@@ -13,6 +14,9 @@ export type CheckResult =
 
 export type ModelResult =
   { ok: true; models: CheckModel[] } | { ok: false; error: string };
+
+export type ExtractResult =
+  { ok: true; text: string } | { ok: false; error: string };
 
 const origin = process.env.CITECHECK_ORIGIN ?? "http://127.0.0.1:8000";
 
@@ -47,6 +51,51 @@ export async function listModels(): Promise<ModelResult> {
       };
     }
     return { ok: true, models };
+  } catch {
+    return {
+      ok: false,
+      error:
+        "The checker is not running. Start it on this machine, then try again.",
+    };
+  }
+}
+
+/** Read a PDF into the brief box. Checking it is still checkBrief. */
+export async function extractBrief(formData: FormData): Promise<ExtractResult> {
+  const file = formData.get("file");
+  if (!(file instanceof File)) {
+    return { ok: false, error: extractError("a PDF is required") };
+  }
+  const pages = formData.get("pages");
+  const body = new FormData();
+  body.set("file", file);
+  if (typeof pages === "string" && pages.trim()) {
+    body.set("pages", pages.trim());
+  }
+
+  try {
+    const response = await fetch(`${origin}/v1/extract`, {
+      method: "POST",
+      body,
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      return { ok: false, error: extractError(await readDetail(response)) };
+    }
+    const payload: unknown = await response.json();
+    if (
+      typeof payload !== "object" ||
+      payload === null ||
+      !("text" in payload) ||
+      typeof payload.text !== "string" ||
+      !payload.text.trim()
+    ) {
+      return {
+        ok: false,
+        error: extractError("no text could be read from this PDF"),
+      };
+    }
+    return { ok: true, text: payload.text };
   } catch {
     return {
       ok: false,

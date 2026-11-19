@@ -53,6 +53,22 @@ export type CheckModel = {
   available: boolean;
 };
 
+const EXTRACT_ERRORS: Record<string, string> = {
+  "a PDF is required": "The file is not a PDF.",
+  "the PDF could not be read": "The file is damaged.",
+  "no text could be read from this PDF":
+    "The pages were blank, or the page range is past the end.",
+  "pages must look like 11-56": "The page range is not that form.",
+  "PDF is larger than 20 MB": "The file is over the limit.",
+};
+
+/** The words the page shows for a failed POST /v1/extract. */
+export function extractError(detail: string): string {
+  return EXTRACT_ERRORS[detail] ?? "The checker could not read that PDF.";
+}
+
+export const MAX_PDF_BYTES = 20 * 1024 * 1024;
+
 /** Citation checks omit the model. Support checks name the selected one. */
 export function checkPayload(
   text: string,
