@@ -48,7 +48,7 @@ export default function AboutPage() {
 
       <div className="mt-site-7 flex flex-wrap items-center gap-x-site-4 gap-y-site-2">
         <h2 className={`${styles.section} text-step-2`}>Contact</h2>
-        <p className="print:hidden [&_a+a]:ml-site-4">
+        <p className="translate-y-[2px] print:hidden [&_a+a]:ml-site-4">
           <a href={`mailto:${contact.email}`}>Email</a>
           <a href={contact.phoneHref}>{contact.phone}</a>
           <a href={contact.github}>GitHub</a>
