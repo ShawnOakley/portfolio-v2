@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
+  checkPayload,
   courtListenerUrl,
   groupCites,
   groupNeedsAttention,
   isProblemCite,
   looseQuotes,
+  parseModels,
   parseReport,
   quoteTone,
   type Report,
@@ -74,6 +76,7 @@ const live: Report = {
       found_on: [],
     },
   ],
+  verdicts: [],
 };
 
 describe("parseReport", () => {
@@ -122,6 +125,7 @@ describe("grouping", () => {
           status: "unattributed",
         },
       ],
+      verdicts: [],
     };
     expect(looseQuotes(report)).toHaveLength(1);
     expect(quoteTone("unattributed")).toBe("problem");
@@ -129,5 +133,29 @@ describe("grouping", () => {
     expect(quoteTone("too_short")).toBe("skip");
     expect(isProblemCite("found")).toBe(false);
     expect(isProblemCite("not_found")).toBe(true);
+  });
+});
+
+describe("checkPayload", () => {
+  it("omits the model unless support was asked", () => {
+    expect(checkPayload("brief", false, "qwen3.5-9b")).toEqual({
+      text: "brief",
+      verdicts: false,
+    });
+    expect(checkPayload("brief", true, "qwen3.5-9b")).toEqual({
+      text: "brief",
+      verdicts: true,
+      model: "qwen3.5-9b",
+    });
+  });
+});
+
+describe("parseModels", () => {
+  it("reads the model list", () => {
+    expect(
+      parseModels({
+        models: [{ id: "qwen3.5-9b", label: "Qwen3.5 9B", available: true }],
+      }),
+    ).toEqual([{ id: "qwen3.5-9b", label: "Qwen3.5 9B", available: true }]);
   });
 });

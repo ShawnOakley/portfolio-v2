@@ -59,7 +59,7 @@ describe("ReportView", () => {
   });
 
   it("says when nothing could be checked", () => {
-    render(<ReportView report={{ cites: [], quotes: [] }} />);
+    render(<ReportView report={{ cites: [], quotes: [], verdicts: [] }} />);
     expect(screen.getByText("Nothing checkable was found.").textContent).toBe(
       "Nothing checkable was found.",
     );

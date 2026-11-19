@@ -29,10 +29,39 @@ export type Quote = {
   found_on: number[];
 };
 
+export type Verdict = {
+  cite_id: number;
+  sentence: string;
+  signal: string;
+  verdict: string;
+  evidence: string;
+  score: number;
+  page: string;
+  on_pin_page: boolean;
+  reason: string;
+};
+
 export type Report = {
   cites: Cite[];
   quotes: Quote[];
+  verdicts: Verdict[];
 };
+
+export type CheckModel = {
+  id: string;
+  label: string;
+  available: boolean;
+};
+
+/** Citation checks omit the model. Support checks name the selected one. */
+export function checkPayload(
+  text: string,
+  verdicts: boolean,
+  model: string | null,
+): { text: string; verdicts: boolean; model?: string } {
+  if (!verdicts) return { text, verdicts: false };
+  return { text, verdicts: true, model: model ?? "" };
+}
 
 const FINE_CITE = new Set(["found", "found_by_name", "not_checkable"]);
 
@@ -51,6 +80,24 @@ const CITE_LABEL: Record<string, string> = {
   bad_reporter: "Bad reporter",
   unresolved_short_form: "Short cite unresolved",
 };
+
+const VERDICT_LABEL: Record<string, string> = {
+  supports: "Supports",
+  partly: "Partly supports",
+  does_not_support: "Does not support",
+  unclear: "Unclear",
+  no_answer: "No answer",
+};
+
+export function verdictLabel(verdict: string): string {
+  return VERDICT_LABEL[verdict] ?? verdict;
+}
+
+export function verdictTone(verdict: string): "fine" | "problem" | "quiet" {
+  if (verdict === "supports") return "fine";
+  if (verdict === "does_not_support") return "problem";
+  return "quiet";
+}
 
 const QUOTE_LABEL: Record<string, string> = {
   verified: "Verified",
@@ -183,6 +230,50 @@ function parseCite(value: unknown): Cite | null {
   };
 }
 
+function parseVerdict(value: unknown): Verdict | null {
+  if (!isRecord(value)) return null;
+  if (typeof value.cite_id !== "number") return null;
+  if (typeof value.sentence !== "string" || typeof value.signal !== "string")
+    return null;
+  if (typeof value.verdict !== "string" || typeof value.evidence !== "string")
+    return null;
+  if (typeof value.score !== "number" || typeof value.page !== "string")
+    return null;
+  if (
+    typeof value.on_pin_page !== "boolean" ||
+    typeof value.reason !== "string"
+  )
+    return null;
+  return {
+    cite_id: value.cite_id,
+    sentence: value.sentence,
+    signal: value.signal,
+    verdict: value.verdict,
+    evidence: value.evidence,
+    score: value.score,
+    page: value.page,
+    on_pin_page: value.on_pin_page,
+    reason: value.reason,
+  };
+}
+
+export function parseModels(value: unknown): CheckModel[] | null {
+  if (!isRecord(value) || !Array.isArray(value.models)) return null;
+  const models: CheckModel[] = [];
+  for (const item of value.models) {
+    if (!isRecord(item)) return null;
+    if (typeof item.id !== "string" || typeof item.label !== "string")
+      return null;
+    if (typeof item.available !== "boolean") return null;
+    models.push({
+      id: item.id,
+      label: item.label,
+      available: item.available,
+    });
+  }
+  return models;
+}
+
 function parseQuote(value: unknown): Quote | null {
   if (!isRecord(value)) return null;
   if (typeof value.id !== "number" || typeof value.text !== "string")
@@ -227,5 +318,14 @@ export function parseReport(value: unknown): Report | null {
     if (!quote) return null;
     quotes.push(quote);
   }
-  return { cites, quotes };
+  const verdicts: Verdict[] = [];
+  if (value.verdicts !== undefined) {
+    if (!Array.isArray(value.verdicts)) return null;
+    for (const item of value.verdicts) {
+      const verdict = parseVerdict(item);
+      if (!verdict) return null;
+      verdicts.push(verdict);
+    }
+  }
+  return { cites, quotes, verdicts };
 }

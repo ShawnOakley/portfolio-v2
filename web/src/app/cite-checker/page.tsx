@@ -38,7 +38,8 @@ export default function CiteCheckerPage() {
       </ul>
       <p className="mt-site-6 text-ink-soft">
         Paste the text of a brief. This check looks up the case and the
-        quotation. It does not ask whether the case supports the sentence. The{" "}
+        quotation. Asking whether the case supports the sentence is a separate
+        control, and it stays off until you turn it on. The{" "}
         <Link href="/notes/design">design notes</Link> record the decisions
         behind it. <Link href="/learn">Learn</Link> is separate, and it does not
         describe the tool.

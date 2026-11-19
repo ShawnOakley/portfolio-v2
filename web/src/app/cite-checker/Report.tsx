@@ -7,9 +7,12 @@ import {
   looseQuotes,
   quoteLabel,
   quoteTone,
+  verdictLabel,
+  verdictTone,
   type Cite,
   type Quote,
   type Report,
+  type Verdict,
 } from "@/lib/citecheck";
 
 function caseTitle(cite: Cite): string {
@@ -133,35 +136,104 @@ function CiteBlock({ cite, nested }: { cite: Cite; nested?: boolean }) {
   );
 }
 
-function GroupList({ groups }: { groups: ReturnType<typeof groupCites> }) {
+function VerdictList({ verdicts }: { verdicts: Verdict[] }) {
+  if (verdicts.length === 0) return null;
   return (
-    <ul className="mt-site-4 list-none border-t border-rule p-0">
-      {groups.map((group) => (
-        <li key={group.cite.id} className="border-b border-rule py-site-4">
-          <CiteBlock cite={group.cite} />
-          <QuoteList
-            quotes={group.quotes.filter(
-              (quote) => quote.cite_id === group.cite.id,
-            )}
+    <ul className="mt-site-3 list-none p-0">
+      {verdicts.map((verdict, index) => (
+        <li
+          key={`${verdict.cite_id}-${index}`}
+          className="border-t border-rule py-site-3"
+        >
+          <StatusMark
+            label={verdictLabel(verdict.verdict)}
+            tone={verdictTone(verdict.verdict)}
           />
-          {group.children.map((child) => (
-            <div key={child.id}>
-              <CiteBlock cite={child} nested />
-              <QuoteList
-                quotes={group.quotes.filter(
-                  (quote) => quote.cite_id === child.id,
-                )}
-              />
-            </div>
-          ))}
+          <p className="mt-site-2 font-serif">{verdict.sentence}</p>
+          {verdict.signal ? (
+            <p className="mt-site-2 text-ink-soft">Signal: {verdict.signal}</p>
+          ) : null}
+          {verdict.evidence ? (
+            <>
+              <blockquote className="mt-site-2 mb-0 font-serif">
+                {verdict.evidence}
+              </blockquote>
+              <p className="mt-site-2 text-ink-soft">
+                Evidence score {verdict.score}.
+                {verdict.score < 80
+                  ? " The evidence was not found as a quotation."
+                  : ""}
+              </p>
+            </>
+          ) : null}
+          {verdict.page ? (
+            <p className="mt-site-2 text-ink-soft">
+              Page {verdict.page}.{" "}
+              {verdict.on_pin_page
+                ? "That page is cited."
+                : "That page is not a cited pin."}
+            </p>
+          ) : null}
+          {verdict.reason ? (
+            <p className="mt-site-2">{verdict.reason}</p>
+          ) : null}
         </li>
       ))}
     </ul>
   );
 }
 
+function GroupList({
+  groups,
+  verdicts,
+}: {
+  groups: ReturnType<typeof groupCites>;
+  verdicts: Verdict[];
+}) {
+  return (
+    <ul className="mt-site-4 list-none border-t border-rule p-0">
+      {groups.map((group) => {
+        return (
+          <li key={group.cite.id} className="border-b border-rule py-site-4">
+            <CiteBlock cite={group.cite} />
+            <QuoteList
+              quotes={group.quotes.filter(
+                (quote) => quote.cite_id === group.cite.id,
+              )}
+            />
+            <VerdictList
+              verdicts={verdicts.filter(
+                (verdict) => verdict.cite_id === group.cite.id,
+              )}
+            />
+            {group.children.map((child) => (
+              <div key={child.id}>
+                <CiteBlock cite={child} nested />
+                <QuoteList
+                  quotes={group.quotes.filter(
+                    (quote) => quote.cite_id === child.id,
+                  )}
+                />
+                <VerdictList
+                  verdicts={verdicts.filter(
+                    (verdict) => verdict.cite_id === child.id,
+                  )}
+                />
+              </div>
+            ))}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 export function ReportView({ report }: { report: Report }) {
-  if (report.cites.length === 0 && report.quotes.length === 0) {
+  if (
+    report.cites.length === 0 &&
+    report.quotes.length === 0 &&
+    report.verdicts.length === 0
+  ) {
     return <p>Nothing checkable was found.</p>;
   }
 
@@ -169,25 +241,35 @@ export function ReportView({ report }: { report: Report }) {
   const problems = groups.filter(groupNeedsAttention);
   const rest = groups.filter((group) => !groupNeedsAttention(group));
   const loose = looseQuotes(report);
+  const placed = new Set(report.cites.map((cite) => cite.id));
+  const looseVerdicts = report.verdicts.filter(
+    (verdict) => !placed.has(verdict.cite_id),
+  );
 
   return (
     <div>
       {problems.length > 0 ? (
         <section>
           <h2 className="text-step-2">Problems</h2>
-          <GroupList groups={problems} />
+          <GroupList groups={problems} verdicts={report.verdicts} />
         </section>
       ) : null}
       {rest.length > 0 ? (
         <section className={problems.length > 0 ? "mt-site-7" : undefined}>
           <h2 className="text-step-2">Citations</h2>
-          <GroupList groups={rest} />
+          <GroupList groups={rest} verdicts={report.verdicts} />
         </section>
       ) : null}
       {loose.length > 0 ? (
         <section className="mt-site-7">
           <h2 className="text-step-2">Quotes without a citation</h2>
           <QuoteList quotes={loose} />
+        </section>
+      ) : null}
+      {looseVerdicts.length > 0 ? (
+        <section className="mt-site-7">
+          <h2 className="text-step-2">Support</h2>
+          <VerdictList verdicts={looseVerdicts} />
         </section>
       ) : null}
     </div>
