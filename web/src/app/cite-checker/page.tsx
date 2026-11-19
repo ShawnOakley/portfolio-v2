@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CheckForm } from "./CheckForm";
 
 const questions = [
   "Does the case exist?",
@@ -36,10 +37,13 @@ export default function CiteCheckerPage() {
         ))}
       </ul>
       <p className="mt-site-6 text-ink-soft">
-        Until it ships, the <Link href="/notes/design">design notes</Link>{" "}
-        record the decisions behind it. <Link href="/learn">Learn</Link> is
-        separate, and it does not describe the tool.
+        Paste the text of a brief. This check looks up the case and the
+        quotation. It does not ask whether the case supports the sentence. The{" "}
+        <Link href="/notes/design">design notes</Link> record the decisions
+        behind it. <Link href="/learn">Learn</Link> is separate, and it does not
+        describe the tool.
       </p>
+      <CheckForm />
     </>
   );
 }

@@ -10,4 +10,8 @@ test("the citation checker page states what it asks of a filing", async ({
   await expect(
     page.getByRole("link", { name: "design notes" }),
   ).toHaveAttribute("href", "/notes/design");
+  await expect(page.getByRole("textbox", { name: "Brief" })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Check citations" }),
+  ).toBeVisible();
 });
