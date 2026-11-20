@@ -16,6 +16,7 @@ const ROUTES = [
   "/notes/design",
   "/notes/no-rich-text-editor",
   "/notes/where-the-demo-keys-live",
+  "/notes/why-nextjs",
   "/notes/why-one-check-is-one-request",
   "/notes/why-qwen35-9b",
   "/notes/why-the-cache-is-temporary",

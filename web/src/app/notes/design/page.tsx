@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CheckFlow } from "@/components/notes/CheckFlow";
 import { BackLink } from "@/components/site/BackLink";
 import { IndexItem, IndexList } from "@/components/site/IndexList";
 import { listNotes } from "@/lib/notes";
@@ -28,6 +29,7 @@ export default async function DesignNotesPage() {
           />
         ))}
       </IndexList>
+      <CheckFlow />
     </>
   );
 }
