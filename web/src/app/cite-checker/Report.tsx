@@ -16,30 +16,78 @@ import {
 } from "@/lib/citecheck";
 
 function caseTitle(cite: Cite): string {
-  if (cite.case_names.length > 0) return cite.case_names.join("; ");
+  if (cite.case_names.length === 1) return cite.case_names[0] ?? cite.text;
   if (cite.plaintiff && cite.defendant) {
     return `${cite.plaintiff} v. ${cite.defendant}`;
   }
   return cite.text;
 }
 
+/** The name-search note is one sentence per hit, joined with "; ". */
+function searchHits(cite: Cite): { label: string; url: string }[] | null {
+  const prefix = "CourtListener has ";
+  if (
+    cite.case_names.length < 2 ||
+    cite.urls.length !== cite.case_names.length ||
+    !cite.note.startsWith(prefix)
+  ) {
+    return null;
+  }
+  const parts = cite.note.slice(prefix.length).split("; ");
+  if (parts.length !== cite.urls.length) return null;
+  return parts.map((label, index) => ({
+    label,
+    url: cite.urls[index] ?? "",
+  }));
+}
+
 function CiteLinks({ cite }: { cite: Cite }) {
   if (cite.urls.length === 0) return null;
+  const hits = searchHits(cite);
+  if (hits) {
+    return (
+      <ul className="mt-site-3 list-none border-t border-rule p-0">
+        {hits.map((hit, index) => (
+          <li
+            key={`${hit.url}-${index}`}
+            className="border-b border-rule py-site-2"
+          >
+            <a
+              href={courtListenerUrl(hit.url)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {hit.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    );
+  }
   const names = cite.case_names.length > 0 ? cite.case_names : [cite.text];
-  return (
-    <p className="mt-site-2">
-      {cite.urls.map((url, index) => (
+  if (cite.urls.length === 1) {
+    return (
+      <p className="mt-site-2">
         <a
-          key={url}
-          href={courtListenerUrl(url)}
-          className="mr-site-4"
+          href={courtListenerUrl(cite.urls[0] ?? "")}
           target="_blank"
           rel="noreferrer"
         >
-          {names[index] ?? cite.text}
+          {names[0] ?? cite.text}
         </a>
+      </p>
+    );
+  }
+  return (
+    <ul className="mt-site-3 list-none border-t border-rule p-0">
+      {cite.urls.map((url, index) => (
+        <li key={`${url}-${index}`} className="border-b border-rule py-site-2">
+          <a href={courtListenerUrl(url)} target="_blank" rel="noreferrer">
+            {names[index] ?? cite.text}
+          </a>
+        </li>
       ))}
-    </p>
+    </ul>
   );
 }
 
@@ -142,7 +190,14 @@ function CiteBlock({ cite, nested }: { cite: Cite; nested?: boolean }) {
           Pin {cite.pin_pages.join(", ")}.
         </p>
       ) : null}
-      {cite.note ? <p className="mt-site-2">{shownNote(cite.note)}</p> : null}
+      {cite.note && searchHits(cite) === null ? (
+        <p className="mt-site-2">{shownNote(cite.note)}</p>
+      ) : null}
+      {searchHits(cite) ? (
+        <p className="mt-site-3 text-ink-soft">
+          CourtListener has these cases for that name and year.
+        </p>
+      ) : null}
       <CiteLinks cite={cite} />
     </div>
   );
