@@ -11,7 +11,7 @@ test("design notes and the colophon return to Notes", async ({ page }) => {
 });
 
 test("a design note returns to the design notes index", async ({ page }) => {
-  await page.goto("/notes/why-the-engine-stays-python");
+  await page.goto("/notes/no-rich-text-editor");
   await page
     .getByRole("link", {
       name: "Back to Citation Checker Implementation Notes",

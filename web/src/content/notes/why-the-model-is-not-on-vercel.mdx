@@ -1,0 +1,11 @@
+# Why the model is not on Vercel
+
+**Decision.** The deployed API calls Qwen3.5 9B at OpenRouter. The same API,
+run on this computer, calls Ollama.
+
+**Why.** The page never calls the model host and never holds a model key.
+
+**What I rejected.**
+
+- _Putting the weights on a Vercel function._ That function has no GPU.
+- _Opening the Ollama port on this computer to the internet._

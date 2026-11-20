@@ -1,0 +1,11 @@
+# Why the cache is temporary
+
+**Decision.** On Vercel the CourtListener cache is written under `/tmp`,
+because the rest of the disk is read-only.
+
+**Why.** A cold start spends the allowance again. On this computer the cache
+stays in `data/cache`.
+
+**What I rejected.**
+
+- _A database for those responses._

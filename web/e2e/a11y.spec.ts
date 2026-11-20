@@ -15,7 +15,12 @@ const ROUTES = [
   "/notes",
   "/notes/design",
   "/notes/no-rich-text-editor",
-  "/notes/why-the-engine-stays-python",
+  "/notes/where-the-demo-keys-live",
+  "/notes/why-one-check-is-one-request",
+  "/notes/why-qwen35-9b",
+  "/notes/why-the-cache-is-temporary",
+  "/notes/why-the-model-is-not-on-vercel",
+  "/notes/why-vercel-as-a-second-project",
   "/colophon",
   "/styleguide",
 ];
