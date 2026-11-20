@@ -104,6 +104,47 @@ describe("ReportView", () => {
     ]);
   });
 
+  it("keeps a long name search closed until it is opened", () => {
+    const names = ["Fahy", "Cooper", "Adams", "Bartlett"];
+    const report = parseReport({
+      cites: [
+        {
+          id: 0,
+          kind: "full_case",
+          text: "999 U.S. 999",
+          status: "citation_mismatch",
+          note: `CourtListener has ${names.map((name) => `${name} v. Board of Education (1955) at 1 A.D. 1`).join("; ")}`,
+          plaintiff: "Brown",
+          defendant: "Board of Education",
+          volume: "999",
+          reporter: "U.S.",
+          page: "999",
+          pin_pages: [],
+          parent_id: null,
+          case_names: names.map((name) => `${name} v. Board of Education`),
+          urls: names.map(
+            (name) => `https://www.courtlistener.com/opinion/${name}/`,
+          ),
+        },
+      ],
+      quotes: [],
+      verdicts: [],
+    });
+    expect(report).not.toBeNull();
+    if (!report) return;
+    render(<ReportView report={report} />);
+
+    const summary = screen.getByText(
+      "CourtListener has 4 cases for that name and year.",
+    );
+    const details = summary.closest("details");
+    expect(details?.hasAttribute("open")).toBe(false);
+    expect(details?.querySelectorAll("a")).toHaveLength(4);
+
+    summary.click();
+    expect(details?.hasAttribute("open")).toBe(true);
+  });
+
   it("says when nothing could be checked", () => {
     render(<ReportView report={{ cites: [], quotes: [], verdicts: [] }} />);
     expect(screen.getByText("Nothing checkable was found.").textContent).toBe(

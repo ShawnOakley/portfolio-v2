@@ -41,27 +41,47 @@ function searchHits(cite: Cite): { label: string; url: string }[] | null {
   }));
 }
 
+const OPEN_HIT_LIMIT = 3;
+
+function HitList({
+  items,
+}: {
+  items: { key: string; href: string; label: string }[];
+}) {
+  const list = (
+    <ul className="mt-site-2 list-none border-t border-rule p-0">
+      {items.map((item) => (
+        <li key={item.key} className="border-b border-rule py-site-2">
+          <a href={item.href} target="_blank" rel="noreferrer">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+  if (items.length <= OPEN_HIT_LIMIT) return list;
+  return (
+    <details className="mt-site-3">
+      <summary className="cursor-pointer text-ink-soft">
+        CourtListener has {items.length} cases for that name and year.
+      </summary>
+      {list}
+    </details>
+  );
+}
+
 function CiteLinks({ cite }: { cite: Cite }) {
   if (cite.urls.length === 0) return null;
   const hits = searchHits(cite);
   if (hits) {
     return (
-      <ul className="mt-site-3 list-none border-t border-rule p-0">
-        {hits.map((hit, index) => (
-          <li
-            key={`${hit.url}-${index}`}
-            className="border-b border-rule py-site-2"
-          >
-            <a
-              href={courtListenerUrl(hit.url)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {hit.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <HitList
+        items={hits.map((hit, index) => ({
+          key: `${hit.url}-${index}`,
+          href: courtListenerUrl(hit.url),
+          label: hit.label,
+        }))}
+      />
     );
   }
   const names = cite.case_names.length > 0 ? cite.case_names : [cite.text];
@@ -79,15 +99,13 @@ function CiteLinks({ cite }: { cite: Cite }) {
     );
   }
   return (
-    <ul className="mt-site-3 list-none border-t border-rule p-0">
-      {cite.urls.map((url, index) => (
-        <li key={`${url}-${index}`} className="border-b border-rule py-site-2">
-          <a href={courtListenerUrl(url)} target="_blank" rel="noreferrer">
-            {names[index] ?? cite.text}
-          </a>
-        </li>
-      ))}
-    </ul>
+    <HitList
+      items={cite.urls.map((url, index) => ({
+        key: `${url}-${index}`,
+        href: courtListenerUrl(url),
+        label: names[index] ?? cite.text,
+      }))}
+    />
   );
 }
 
@@ -167,6 +185,7 @@ function QuoteList({ quotes }: { quotes: Quote[] }) {
 function CiteBlock({ cite, nested }: { cite: Cite; nested?: boolean }) {
   const problem = isProblemCite(cite.status);
   const title = caseTitle(cite);
+  const hits = searchHits(cite);
   return (
     <div
       className={
@@ -190,10 +209,10 @@ function CiteBlock({ cite, nested }: { cite: Cite; nested?: boolean }) {
           Pin {cite.pin_pages.join(", ")}.
         </p>
       ) : null}
-      {cite.note && searchHits(cite) === null ? (
+      {cite.note && hits === null ? (
         <p className="mt-site-2">{shownNote(cite.note)}</p>
       ) : null}
-      {searchHits(cite) ? (
+      {hits && hits.length <= OPEN_HIT_LIMIT ? (
         <p className="mt-site-3 text-ink-soft">
           CourtListener has these cases for that name and year.
         </p>
