@@ -6,7 +6,6 @@
       "url": [
         "http://localhost:3200/",
         "http://localhost:3200/notes",
-        "http://localhost:3200/notes/where-your-key-goes",
         "http://localhost:3200/colophon"
       ],
       "numberOfRuns": 3,

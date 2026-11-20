@@ -6,6 +6,7 @@ import { CodeBlock } from "@/components/ui/CodeBlock";
 import { DocumentFrame } from "@/components/ui/DocumentFrame";
 import { Figure } from "@/components/ui/Figure";
 import { Metric } from "@/components/ui/Metric";
+import { Notice } from "@/components/ui/Notice";
 import { SourceLink } from "@/components/ui/SourceLink";
 import { StatusChip } from "@/components/ui/StatusChip";
 import { STATUS_KEYS } from "@/lib/status";
@@ -104,6 +105,18 @@ export default function StyleGuide() {
         <div className="flex flex-wrap items-start gap-x-site-4 gap-y-site-3">
           <Metric label="Example at 50 items" successes={45} n={50} />
           <Metric label="Example at 500 items" successes={450} n={500} />
+        </div>
+      </section>
+
+      <section className={section}>
+        <h2 className={heading}>Notices</h2>
+        <div>
+          <Notice tone="error">The checker could not read that PDF.</Notice>
+          <Notice tone="progress">
+            Checking citations. A short brief takes a few seconds. A long one
+            takes longer.
+          </Notice>
+          <Notice tone="success">The check is finished.</Notice>
         </div>
       </section>
 

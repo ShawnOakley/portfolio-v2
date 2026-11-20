@@ -43,6 +43,16 @@ function CiteLinks({ cite }: { cite: Cite }) {
   );
 }
 
+function shownNote(note: string): string {
+  if (
+    note ===
+    "this version of the opinion has no page numbers, so the page wasn't checked"
+  ) {
+    return "This version of the opinion has no page numbers, so the page wasn't checked.";
+  }
+  return note;
+}
+
 function StatusMark({
   label,
   tone,
@@ -86,7 +96,9 @@ function QuoteList({ quotes }: { quotes: Quote[] }) {
             <blockquote className="mt-site-2 mb-0 font-serif">
               {quote.text}
             </blockquote>
-            {quote.note ? <p className="mt-site-2">{quote.note}</p> : null}
+            {quote.note ? (
+              <p className="mt-site-2">{shownNote(quote.note)}</p>
+            ) : null}
             {quote.omits ? (
               <p className="mt-site-2 text-ink-soft">
                 The quotation omits words.
@@ -130,7 +142,7 @@ function CiteBlock({ cite, nested }: { cite: Cite; nested?: boolean }) {
           Pin {cite.pin_pages.join(", ")}.
         </p>
       ) : null}
-      {cite.note ? <p className="mt-site-2">{cite.note}</p> : null}
+      {cite.note ? <p className="mt-site-2">{shownNote(cite.note)}</p> : null}
       <CiteLinks cite={cite} />
     </div>
   );

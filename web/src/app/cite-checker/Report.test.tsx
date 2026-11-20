@@ -52,7 +52,7 @@ describe("ReportView", () => {
     expect(screen.getByText("Verified")).toBeTruthy();
     expect(
       screen.getByText(
-        "this version of the opinion has no page numbers, so the page wasn't checked",
+        "This version of the opinion has no page numbers, so the page wasn't checked.",
       ),
     ).toBeTruthy();
     expect(screen.queryByText(/Found on page/)).toBeNull();

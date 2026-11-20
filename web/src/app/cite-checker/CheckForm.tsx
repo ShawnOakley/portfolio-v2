@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type DragEvent, type FormEvent } from "react";
+import { Notice } from "@/components/ui/Notice";
 import { checkBrief, extractBrief, listModels } from "./actions";
 import { ReportView } from "./Report";
 import {
@@ -9,18 +10,6 @@ import {
   type CheckModel,
   type Report,
 } from "@/lib/citecheck";
-
-function Wait({ children }: { children: string }) {
-  return (
-    <p className="mt-site-5 flex items-start gap-site-3" role="status">
-      <span
-        className="mt-[0.2em] inline-block size-4 shrink-0 animate-spin rounded-full border-2 border-ink border-t-transparent"
-        aria-hidden="true"
-      />
-      <span>{children}</span>
-    </p>
-  );
-}
 
 export function CheckForm() {
   const [text, setText] = useState("");
@@ -192,9 +181,7 @@ export function CheckForm() {
             </option>
           ))}
         </select>
-        {modelNote ? (
-          <p className="mt-site-2 text-step-small text-ink-soft">{modelNote}</p>
-        ) : null}
+        {modelNote ? <Notice tone="error">{modelNote}</Notice> : null}
         <label className="mt-site-4 flex items-start gap-site-2">
           <input
             type="checkbox"
@@ -217,19 +204,15 @@ export function CheckForm() {
           supports the sentence. That takes several minutes.
         </p>
       </form>
-      {reading ? <Wait>Reading the PDF.</Wait> : null}
+      {reading ? <Notice tone="progress">Reading the PDF.</Notice> : null}
       {pending ? (
-        <Wait>
+        <Notice tone="progress">
           {askSupport
             ? "Asking the model whether each case supports the sentence. This can take several minutes."
             : "Checking citations. A short brief takes a few seconds. A long one takes longer."}
-        </Wait>
+        </Notice>
       ) : null}
-      {error ? (
-        <p className="mt-site-5" role="alert">
-          {error}
-        </p>
-      ) : null}
+      {error ? <Notice tone="error">{error}</Notice> : null}
       {report ? (
         <div className="mt-site-7">
           <ReportView report={report} />

@@ -15,8 +15,7 @@ showing that version in the site footer, makes the link checkable.
   no backend. It would also mean a second implementation of citation parsing,
   quote matching and the support check, with no benchmark behind it.
 - _Calling Anthropic directly from the browser for the support check only._
-  It splits one pipeline across two languages for a privacy gain I can state
-  honestly another way (see "Where your key goes").
+  It splits one pipeline across two languages.
 
 **Cost.** Keys pass through a server function. Request bodies are capped at
 4.5 MB, so PDFs are read in the browser and only text is sent.
