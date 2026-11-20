@@ -9,6 +9,7 @@ import {
   type CheckModel,
   type Report,
 } from "@/lib/citecheck";
+import { claimCheck, waitMessage } from "./submission-limit";
 
 export type CheckResult =
   { ok: true; report: Report } | { ok: false; error: string };
@@ -116,6 +117,10 @@ export async function checkBrief(
   if (!brief) return { ok: false, error: "Paste the text of a brief." };
   if (verdicts && !model) {
     return { ok: false, error: "Choose a model before asking for support." };
+  }
+  const admission = claimCheck();
+  if (!admission.ok) {
+    return { ok: false, error: waitMessage(admission.retryInMs) };
   }
 
   try {

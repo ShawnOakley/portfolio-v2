@@ -10,9 +10,10 @@ import {
   type CheckModel,
   type Report,
 } from "@/lib/citecheck";
+import { SAMPLE_BRIEF } from "./sample-brief";
 
 export function CheckForm() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(SAMPLE_BRIEF);
   const [models, setModels] = useState<CheckModel[]>([]);
   const [modelId, setModelId] = useState("");
   const [modelNote, setModelNote] = useState<string | null>(null);
