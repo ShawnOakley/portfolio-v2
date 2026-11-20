@@ -14,8 +14,9 @@ export function admit(
   windowMs = CHECK_WINDOW_MS,
 ): Admission {
   const open = stamps.filter((stamp) => now - stamp < windowMs);
-  if (open.length >= limit) {
-    return { ok: false, stamps: open, retryInMs: open[0] + windowMs - now };
+  const oldest = open[0];
+  if (oldest !== undefined && open.length >= limit) {
+    return { ok: false, stamps: open, retryInMs: oldest + windowMs - now };
   }
   return { ok: true, stamps: [...open, now] };
 }
