@@ -18,7 +18,7 @@ export default function NotesPage() {
       <IndexList>
         <IndexItem
           href="/notes/design"
-          title="Design notes"
+          title="Citation Checker Implementation Notes"
           summary="One decision, why it was made, and what was rejected."
         />
         <IndexItem

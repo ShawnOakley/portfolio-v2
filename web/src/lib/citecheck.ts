@@ -62,6 +62,20 @@ const EXTRACT_ERRORS: Record<string, string> = {
   "PDF is larger than 20 MB": "The file is over the limit.",
 };
 
+/** The words the page shows for a known POST /v1/check failure. */
+export function checkFailure(status: number, detail: string): string | null {
+  if (status === 503 && detail === "the model is not configured") {
+    return "The model is not configured.";
+  }
+  if (status === 400 && detail === "unknown model") {
+    return "That model is not available.";
+  }
+  if (status === 400 && detail === "text is required") {
+    return "Paste the text of a brief.";
+  }
+  return null;
+}
+
 /** The words the page shows for a failed POST /v1/extract. */
 export function extractError(detail: string): string {
   return EXTRACT_ERRORS[detail] ?? "The checker could not read that PDF.";

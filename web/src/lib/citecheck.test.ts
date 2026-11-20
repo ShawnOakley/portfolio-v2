@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  checkFailure,
   checkPayload,
   extractError,
   MAX_PDF_BYTES,
@@ -149,6 +150,21 @@ describe("checkPayload", () => {
       verdicts: true,
       model: "qwen3.5-9b",
     });
+  });
+});
+
+describe("checkFailure", () => {
+  it("names a missing model key and an unknown model", () => {
+    expect(checkFailure(503, "the model is not configured")).toBe(
+      "The model is not configured.",
+    );
+    expect(checkFailure(400, "unknown model")).toBe(
+      "That model is not available.",
+    );
+    expect(checkFailure(400, "text is required")).toBe(
+      "Paste the text of a brief.",
+    );
+    expect(checkFailure(500, "the model is not configured")).toBeNull();
   });
 });
 

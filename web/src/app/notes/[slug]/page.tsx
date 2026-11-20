@@ -25,7 +25,10 @@ export default async function NotePage({ params }: PageProps<"/notes/[slug]">) {
   const { default: Note } = await import(`@/content/notes/${slug}.mdx`);
   return (
     <>
-      <BackLink href="/notes/design" label="Back to Design notes" />
+      <BackLink
+        href="/notes/design"
+        label="Back to Citation Checker Implementation Notes"
+      />
       <Note />
     </>
   );

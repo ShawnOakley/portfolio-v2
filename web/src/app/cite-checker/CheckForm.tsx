@@ -213,9 +213,8 @@ export function CheckForm() {
           Check citations
         </button>
         <p className="mt-site-3 text-step-small text-ink-soft">
-          The citation check runs on this computer, not on the public site. If
-          you check the box, the selected model also says whether the case
-          supports the sentence. That part takes several minutes.
+          If you check the box, the selected model also says whether the case
+          supports the sentence. That takes several minutes.
         </p>
       </form>
       {reading ? <Wait>Reading the PDF.</Wait> : null}

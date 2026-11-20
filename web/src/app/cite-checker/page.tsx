@@ -9,6 +9,9 @@ const questions = [
   "Does the case support the sentence it is cited for?",
 ];
 
+/** A support check can take minutes. The host may still cut a longer call off. */
+export const maxDuration = 300;
+
 export const metadata: Metadata = {
   title: "Legal AI",
   description:

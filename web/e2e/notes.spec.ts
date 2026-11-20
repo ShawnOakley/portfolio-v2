@@ -12,8 +12,10 @@ test("design notes and the colophon return to Notes", async ({ page }) => {
 
 test("a design note returns to the design notes index", async ({ page }) => {
   await page.goto("/notes/why-the-engine-stays-python");
-  await page.getByRole("link", { name: "Back to Design notes" }).click();
+  await page
+    .getByRole("link", { name: "Back to Citation Checker Implementation Notes" })
+    .click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Design notes",
+    "Citation Checker Implementation Notes",
   );
 });

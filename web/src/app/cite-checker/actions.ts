@@ -1,6 +1,7 @@
 "use server";
 
 import {
+  checkFailure,
   checkPayload,
   extractError,
   parseModels,
@@ -124,18 +125,14 @@ export async function checkBrief(
       body: JSON.stringify(checkPayload(brief, verdicts, model)),
       cache: "no-store",
     });
-    if (response.status === 400) {
-      const detail = await readDetail(response);
-      if (detail === "unknown model") {
-        return { ok: false, error: "That model is not available." };
-      }
-      if (detail === "text is required") {
-        return { ok: false, error: "Paste the text of a brief." };
-      }
-      return { ok: false, error: "The checker did not accept that brief." };
-    }
     if (!response.ok) {
-      return { ok: false, error: "The checker did not accept that brief." };
+      const detail = await readDetail(response);
+      return {
+        ok: false,
+        error:
+          checkFailure(response.status, detail) ??
+          "The checker did not accept that brief.",
+      };
     }
     const report = parseReport(await response.json());
     if (!report) {
