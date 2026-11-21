@@ -10,7 +10,7 @@ test("about states the work and how to reach him", async ({ page }) => {
   expect(pdf.headers()["content-type"] ?? "").toContain("pdf");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("About");
   await expect(page.locator("main .lede")).toHaveText(
-    "I trained and practiced as a lawyer, then spent ten years as a software engineer. These are the parts of that work the tools come from.",
+    "I practiced law at Morrison & Foerster and Paul Hastings, then spent ten years as a software engineer. I now build legal AI tools, starting with a citation checker for briefs.",
   );
   await expect(page.getByRole("heading", { name: "Additional" })).toHaveCount(
     0,
@@ -44,8 +44,7 @@ test("about states the work and how to reach him", async ({ page }) => {
   await expect(law).toHaveAttribute("aria-expanded", "true");
   await expect(legal).toHaveCount(2);
   await expect(legal.nth(1)).toHaveAttribute("href", "/cite-checker");
-  await expect(graphics).toHaveCount(2);
-  await expect(graphics.nth(1)).toHaveAttribute("href", "/graphics");
+  await expect(graphics).toHaveCount(1);
   await expect(
     page.getByRole("heading", {
       name: "Volunteer, unlawful detainer answer clinic",

@@ -4,7 +4,7 @@ import { IndexItem, IndexList } from "@/components/site/IndexList";
 export const metadata: Metadata = {
   title: "Notes",
   description:
-    "Design notes record decisions. The colophon records how the site is built.",
+    "Why the citation checker is built the way it is, and how this site is put together.",
 };
 
 export default function NotesPage() {
@@ -12,14 +12,14 @@ export default function NotesPage() {
     <>
       <h1>Notes</h1>
       <p className="lede">
-        Design notes record one decision and what was rejected. The colophon
-        records how the site is built.
+        Why the checker is built the way it is, and how this site is put
+        together.
       </p>
       <IndexList>
         <IndexItem
           href="/notes/design"
           title="Citation Checker Implementation Notes"
-          summary="One decision, why it was made, and what was rejected."
+          summary="The choices behind the checker, and what each one cost."
         />
         <IndexItem
           href="/colophon"

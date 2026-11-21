@@ -17,6 +17,7 @@ export function CheckForm() {
   const [models, setModels] = useState<CheckModel[]>([]);
   const [modelId, setModelId] = useState("");
   const [modelNote, setModelNote] = useState<string | null>(null);
+  const [modelsLoaded, setModelsLoaded] = useState(false);
   const [askSupport, setAskSupport] = useState(false);
   const [pages, setPages] = useState("");
   const [dragOver, setDragOver] = useState(false);
@@ -29,6 +30,7 @@ export function CheckForm() {
     let cancelled = false;
     void listModels().then((result) => {
       if (cancelled) return;
+      setModelsLoaded(true);
       if (!result.ok) {
         setModelNote(result.error);
         return;
@@ -174,7 +176,9 @@ export function CheckForm() {
           className="mt-site-2 block rounded-site border border-rule-strong bg-paper-raised px-site-3 py-site-1 text-ink"
         >
           {models.length === 0 ? (
-            <option value="">No model listed</option>
+            <option value="">
+              {modelsLoaded ? "No model listed" : "Loading models…"}
+            </option>
           ) : null}
           {models.map((model) => (
             <option key={model.id} value={model.id} disabled={!model.available}>

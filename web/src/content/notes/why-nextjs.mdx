@@ -1,12 +1,10 @@
 # Why Next.js
 
-**Decision.** The checker page calls the API from a Next.js server action. The
-browser never calls the model host and never holds a key.
+When you press Check, your browser sends the brief to this site, and the
+site's server calls the checker. The browser never talks to the checker or to
+the model host, and it never holds a key.
 
-**Why.** The page posts the brief to this site, and the server calls the
-checker. The browser does not need the checker to allow its origin.
-
-**What I rejected.**
-
-- _Calling the checker from the browser._
-- _Calling OpenRouter from the page._
+That is why the page uses a Next.js server action and not a script that calls
+the API directly. Calling the checker from the browser would have meant
+opening it to other origins. Calling the model from the page would have meant
+shipping a key to every visitor.

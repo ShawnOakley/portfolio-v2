@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Metric } from "@/components/ui/Metric";
 import { CheckForm } from "./CheckForm";
 
 const questions = [
@@ -26,8 +27,7 @@ export default function CiteCheckerPage() {
         Software that checks a brief’s citations and shows its evidence.
       </p>
       <p className="mt-site-5">
-        It is open source and in progress. It asks of every citation in a
-        filing:
+        It is in progress. It asks of every citation in a filing:
       </p>
       <ul className="mt-site-6 list-none border-t border-rule p-0">
         {questions.map((question) => (
@@ -40,12 +40,35 @@ export default function CiteCheckerPage() {
         ))}
       </ul>
       <p className="mt-site-6 text-ink-soft">
-        Paste the text of a brief, or drop a PDF. This check looks up the case
-        and the quotation. Asking whether the case supports the sentence is a
-        separate control, and it stays off until you turn it on. The{" "}
+        Paste the text of a brief, or drop a PDF. The basic check verifies each
+        case and each quotation. Checking whether the case supports the sentence
+        is optional, uses a language model, and takes several minutes. The{" "}
         <Link href="/notes/design">design notes</Link> record the decisions
-        behind it. <Link href="/learn">Learn</Link> is separate, and it does not
-        describe the tool.
+        behind it.
+      </p>
+      <h2 className="mt-site-7 text-step-2">Results so far</h2>
+      <p className="mt-site-3">
+        The filing sanctioned in <i>Mata v. Avianca</i> cited seven cases that
+        do not exist. The checker flags five of them. The other two are Westlaw
+        citations, which it reports as not checkable.
+      </p>
+      <p className="mt-site-3">
+        A separate test set of 50 sentences was scored once, with the prompt
+        frozen beforehand.
+      </p>
+      <div className="mt-site-5 flex flex-wrap gap-site-6">
+        <Metric label="Altered quotations flagged" successes={12} n={12} />
+        <Metric
+          label="Support verdicts matching the label"
+          successes={10}
+          n={15}
+        />
+      </div>
+      <p className="mt-site-4 text-ink-soft">
+        All five support misses were the same error: the model rated partial
+        support as full support. Every verdict quoted its evidence from the
+        opinion. <Link href="/learn/evaluation">Evaluation</Link> explains the
+        intervals.
       </p>
       <CheckForm />
     </>

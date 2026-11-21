@@ -5,7 +5,7 @@ import { SplatViewer } from "./SplatViewer";
 export const metadata: Metadata = {
   title: "Gaussian splats",
   description:
-    "A Gaussian splat viewer. The technique is work from Hover. The lion scan is by Renaud, CC BY 4.0.",
+    "A Gaussian splat viewer, from work at Hover. The lion scan is by Renaud, CC BY 4.0.",
 };
 
 export default function SplatsPage() {
@@ -14,8 +14,8 @@ export default function SplatsPage() {
       <BackLink href="/graphics" label="Back to Graphics" />
       <h1>Gaussian splats</h1>
       <p className="lede">
-        Gaussian splatting is work from Hover, on the web modeling tools. This
-        file is not a Hover capture.
+        I worked with Gaussian splats at Hover, on the web modeling tools. The
+        scan shown here is a public one.
       </p>
       <SplatViewer />
       <p className="mt-site-3 text-ink-soft">

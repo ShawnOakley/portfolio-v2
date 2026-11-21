@@ -6,7 +6,8 @@ import { listNotes } from "@/lib/notes";
 
 export const metadata: Metadata = {
   title: "Citation Checker Implementation Notes",
-  description: "Short records of design decisions, with what was rejected.",
+  description:
+    "Short notes on why the citation checker is built the way it is.",
 };
 
 export default async function DesignNotesPage() {
@@ -16,8 +17,7 @@ export default async function DesignNotesPage() {
       <BackLink href="/notes" label="Back to Notes" />
       <h1>Citation Checker Implementation Notes</h1>
       <p className="lede">
-        Each note records one decision, the reason for it, and what was
-        rejected.
+        Short notes on why the checker is built the way it is.
       </p>
       <IndexList>
         {notes.map((note) => (

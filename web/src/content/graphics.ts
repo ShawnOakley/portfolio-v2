@@ -4,23 +4,16 @@ export type GraphicsPiece = {
   summary: string;
 };
 
-/** The two viewers on this site. */
+/** Viewers listed on the Graphics page. The projection viewer is unlisted until it has a real room. */
 export const graphicsExhibits: GraphicsPiece[] = [
   {
     title: "Gaussian splats",
     href: "/graphics/splats",
-    summary:
-      "A splat viewer. Gaussian splatting is work from Hover. The lion on the page is a CC BY scan by Renaud, not a Hover capture.",
-  },
-  {
-    title: "Projection viewer",
-    href: "/graphics/projection",
-    summary:
-      "A photograph projected from the camera that took it onto a room, so a short move shows parallax. The same kind of 360° viewer rebuilt at YouVisit. The room here is a stand-in.",
+    summary: "A Gaussian splat viewer. The lion is a CC BY scan by Renaud.",
   },
 ];
 
-/** Older repositories. They are linked, not embedded. */
+/** Older repositories. Not shown on the Graphics page since 2026-11-21; kept here so they can be restored. */
 export const graphicsPieces: GraphicsPiece[] = [
   {
     title: "A-Frame robot",

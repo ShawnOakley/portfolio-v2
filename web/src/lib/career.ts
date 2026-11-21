@@ -90,6 +90,24 @@ export function parseDates(
   return { start, end };
 }
 
+/**
+ * Chart span for a role. A year-only range ends at the start of its last year,
+ * so "2022 – 2023" and "2023 – 2024" meet instead of overlapping for a year.
+ */
+export function chartDates(
+  dates: string,
+  asOf: Date,
+): { start: Date; end: Date } {
+  const range = parseDates(dates, asOf);
+  const years = /^(\d{4}) – (\d{4})$/.exec(dates.trim());
+  const first = Number(years?.[1]);
+  const last = Number(years?.[2]);
+  if (years && last > first) {
+    return { start: range.start, end: new Date(Date.UTC(last, 0, 1)) };
+  }
+  return range;
+}
+
 /** A shared handoff month is not a second row. A real overlap is. */
 function overlaps(
   a: { start: Date; end: Date },
@@ -126,7 +144,7 @@ export function layoutCareer(roles: Role[], schools: School[], asOf: Date) {
     ...roles.map((role) => ({
       role,
       lane: role.lane,
-      ...parseDates(role.dates, asOf),
+      ...chartDates(role.dates, asOf),
     })),
   ];
 

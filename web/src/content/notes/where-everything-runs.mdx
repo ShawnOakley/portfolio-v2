@@ -1,0 +1,16 @@
+# Where everything runs
+
+The page and the checker are two separate deployments on Vercel. The page is
+this site. The checker is a FastAPI service with its own project, so a change
+to one does not redeploy the other.
+
+The model is not on Vercel, because a Vercel function has no GPU. The deployed
+checker calls Qwen3.5 9B at OpenRouter. On my own machine the same code calls
+Ollama.
+
+The CourtListener token and the model key live in the checker's server
+settings. They are not in the repository, and they never reach your browser.
+
+One thing I would change: on Vercel the checker can only write to a temporary
+folder, so its cache of CourtListener responses is lost whenever the function
+restarts, and the next check spends the request allowance again.

@@ -24,15 +24,15 @@ describe("career dates", () => {
       expect(careerLanes).toContain(role.lane);
     }
     const layout = layoutCareer(roles, education, asOf);
-    const sabbatical = layout.placed.find(
-      (item) => item.role.title === "Personal sabbatical",
+    const independent = layout.placed.find(
+      (item) =>
+        item.role.title === "Independent projects, legal AI and generative AI",
     );
     const emt = layout.placed.find(
       (item) => item.role.title === "Emergency medical technician",
     );
-    expect(sabbatical?.lane).toBe("Other");
+    expect(independent?.lane).toBe("Software");
     expect(emt?.lane).toBe("Other");
-    expect(sabbatical?.row).not.toBe(emt?.row);
     const software = layout.placed.filter((item) => item.lane === "Software");
     expect(software.every((item) => item.row === 0)).toBe(true);
     expect(layout.lanes[0]?.lane).toBe("Education");
@@ -70,9 +70,9 @@ describe("career dates", () => {
     expect(laneSpan(law?.roles ?? [])).toBe("2009 – present");
     expect(
       laneSpan(groups.find((group) => group.lane === "Software")?.roles ?? []),
-    ).toBe("2013 – 2024");
+    ).toBe("2013 – present");
     expect(
       laneSpan(groups.find((group) => group.lane === "Other")?.roles ?? []),
-    ).toBe("2024 – present");
+    ).toBe("2025 – present");
   });
 });
