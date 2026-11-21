@@ -32,8 +32,8 @@ export default function AboutPage() {
       <h1 className="print:hidden">About</h1>
       <p className="lede print:hidden">
         I practiced law at Morrison &amp; Foerster and Paul Hastings, then spent
-        ten years as a software engineer. I now build legal AI tools, starting
-        with a citation checker for briefs.
+        over a decade as a software engineer. I now build legal AI tools,
+        starting with a citation checker for briefs.
       </p>
       <section className="mt-site-7 print:hidden">
         <div className="flex flex-wrap items-center gap-x-site-4 gap-y-site-2">

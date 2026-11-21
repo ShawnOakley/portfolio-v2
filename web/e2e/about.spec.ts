@@ -10,7 +10,7 @@ test("about states the work and how to reach him", async ({ page }) => {
   expect(pdf.headers()["content-type"] ?? "").toContain("pdf");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("About");
   await expect(page.locator("main .lede")).toHaveText(
-    "I practiced law at Morrison & Foerster and Paul Hastings, then spent ten years as a software engineer. I now build legal AI tools, starting with a citation checker for briefs.",
+    "I practiced law at Morrison & Foerster and Paul Hastings, then spent over a decade as a software engineer. I now build legal AI tools, starting with a citation checker for briefs.",
   );
   await expect(page.getByRole("heading", { name: "Additional" })).toHaveCount(
     0,
