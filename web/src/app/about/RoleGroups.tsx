@@ -40,7 +40,7 @@ function RoleItem({ role }: { role: Role }) {
       </p>
       {role.explains && (
         <p className="col-span-2 mt-site-2 text-step-small text-ink-soft">
-          Explains <ProjectName item={role.explains} />.
+          Background for <ProjectName item={role.explains} />.
         </p>
       )}
     </li>

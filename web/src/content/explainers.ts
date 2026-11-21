@@ -4,7 +4,7 @@ export type Explainer = {
   summary: string;
 };
 
-/** Domain pages. They describe citations, not the tools. */
+/** Domain pages. */
 export const explainers: Explainer[] = [
   {
     href: "/learn/citation-anatomy",
@@ -22,6 +22,6 @@ export const explainers: Explainer[] = [
     href: "/learn/evaluation",
     title: "Evaluation",
     summary:
-      "A confusion matrix, precision and recall, and why the same rate is wider at 50 items than at 500.",
+      "Precision and recall, why the same rate is wider at 50 items than at 500, and the cite-checker’s measured results.",
   },
 ];

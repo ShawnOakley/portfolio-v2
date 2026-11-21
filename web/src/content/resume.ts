@@ -2,7 +2,7 @@ import { siteName } from "@/lib/site";
 
 /**
  * One source for the About page and the printed résumé.
- * Dates and outcomes are compressed from the 2026-11-05 résumé.
+ * Dates are years only, as on the 2026-11-21 résumé.
  * A role links to a project only when that project has a page.
  */
 
@@ -47,15 +47,15 @@ export const contact = {
 
 export const argument: { text: string; explains: Explanation }[] = [
   {
-    text: "Hatch-Waxman ANDA patent litigation at Paul Hastings, including review of patents and filings. Litigation practice: pleadings, discovery, and review of case files. The citator follows the cite-checker.",
+    text: "A checker for the citations in a legal brief. It comes from litigation practice at Paul Hastings: Hatch-Waxman patent cases, pleadings, discovery, and cite-checking filings by hand.",
     explains: { label: "Legal AI", href: "/cite-checker" },
   },
   {
-    text: "Cross-border IP diligence at Morrison & Foerster in Tokyo, where the work product was a diligence report.",
+    text: "A Gaussian splat viewer in Three.js. It comes from web AR at Hover, 3D store experiences at Obsess AR, and the 360° viewer I rebuilt at YouVisit.",
     explains: { label: "Graphics", href: "/graphics" },
   },
   {
-    text: "The front-end pod at Domino Data Lab, and the asset system at YouVisit.",
+    text: "How this site is built and tested. It comes from leading the front-end pod at Domino Data Lab and building the asset system at YouVisit.",
     explains: { label: "This site", href: "/colophon" },
   },
 ];
@@ -65,24 +65,26 @@ export const experience: Role[] = [
     title: "Document review specialist",
     organization: "Consilio",
     location: "Remote",
-    dates: "Jun 2025 – Apr 2026",
+    dates: "2025 – 2026",
     lane: "Law",
     outcome:
       "Reviewed and coded electronically stored information for responsiveness, privilege, and confidentiality.",
   },
   {
-    title: "Personal sabbatical",
+    title: "Independent projects, legal AI and generative AI",
     organization: "",
     location: "",
-    dates: "May 2024 – Jun 2025",
-    lane: "Other",
-    outcome: "Studied generative image and local language-model pipelines.",
+    dates: "2024 – present",
+    lane: "Software",
+    outcome:
+      "Built the citation checker on this site, local language-model and retrieval pipelines, and a multi-GPU image and video pipeline.",
+    explains: { label: "Legal AI", href: "/cite-checker" },
   },
   {
     title: "Senior software engineer II",
     organization: "Hover",
     location: "New York, NY",
-    dates: "Dec 2023 – May 2024",
+    dates: "2023 – 2024",
     lane: "Software",
     outcome:
       "Built web AR and modeling tools for construction and insurance, on LiDAR, Three.js, React, Rails, and Python.",
@@ -92,16 +94,17 @@ export const experience: Role[] = [
     title: "Senior web graphics engineer",
     organization: "Obsess AR",
     location: "New York, NY",
-    dates: "Aug 2022 – Aug 2023",
+    dates: "2022 – 2023",
     lane: "Software",
     outcome:
       "Built 3D store experiences in Three.js and React, and added Next.js server rendering that halved page-load time.",
+    explains: { label: "Graphics", href: "/graphics" },
   },
   {
     title: "Senior software engineer II",
     organization: "Domino Data Lab",
     location: "New York, NY",
-    dates: "Oct 2019 – Jul 2022",
+    dates: "2019 – 2022",
     lane: "Software",
     outcome:
       "Led a four-engineer front-end pod on an MLOps platform for building, deploying, and managing models.",
@@ -111,7 +114,7 @@ export const experience: Role[] = [
     title: "Senior software engineer",
     organization: "YouVisit",
     location: "New York, NY",
-    dates: "Feb 2018 – Oct 2019",
+    dates: "2018 – 2019",
     lane: "Software",
     outcome:
       "Led the 360° media viewer rebuild and a digital asset system from studio discovery through delivery.",
@@ -121,7 +124,7 @@ export const experience: Role[] = [
     title: "Senior software engineer",
     organization: "Smartling",
     location: "New York, NY",
-    dates: "Apr 2016 – Feb 2018",
+    dates: "2016 – 2018",
     lane: "Software",
     outcome:
       "Built the translation workbench in React and connected it to machine translation with a human review step.",
@@ -130,7 +133,7 @@ export const experience: Role[] = [
     title: "Software engineer",
     organization: "MediaMath",
     location: "New York, NY",
-    dates: "Jan 2015 – Apr 2016",
+    dates: "2015 – 2016",
     lane: "Software",
     outcome:
       "Built the SOX-compliant financial reporting platform for the company’s financial data.",
@@ -139,7 +142,7 @@ export const experience: Role[] = [
     title: "Software engineer",
     organization: "Yodle",
     location: "New York, NY",
-    dates: "Nov 2013 – Jan 2015",
+    dates: "2013 – 2015",
     lane: "Software",
     outcome:
       "Built brand and franchisee sites, and the AWS services behind them.",
@@ -159,14 +162,13 @@ export const experience: Role[] = [
     location: "",
     dates: "2020 – 2022",
     lane: "Teaching",
-    outcome:
-      "Aided in the implementation and instruction of JavaScript. Conducted office hours, helped devise lesson plans, and answered student questions in and outside of class.",
+    outcome: "Tutored JavaScript students and held office hours.",
   },
   {
     title: "Attorney, life sciences group",
     organization: "Paul Hastings LLP",
     location: "New York, NY",
-    dates: "Oct 2011 – Jun 2013",
+    dates: "2011 – 2013",
     lane: "Law",
     outcome:
       "Scientific resource on Hatch-Waxman ANDA patent litigation, and supervised review of patents and filings.",
@@ -176,11 +178,10 @@ export const experience: Role[] = [
     title: "Attorney, technology transfer group",
     organization: "Morrison & Foerster LLP",
     location: "Tokyo, Japan",
-    dates: "Sep 2009 – Oct 2011",
+    dates: "2009 – 2011",
     lane: "Law",
     outcome:
       "Advised on IP and contract risk in cross-border technology deals and wrote the diligence reports.",
-    explains: { label: "Graphics", href: "/graphics" },
   },
 ];
 
@@ -189,7 +190,7 @@ export const additional: Role[] = [
     title: "Volunteer, unlawful detainer answer clinic",
     organization: "Community Legal Aid SoCal",
     location: "Long Beach, CA",
-    dates: "Aug 2026 – present",
+    dates: "2026 – present",
     lane: "Law",
     outcome:
       "Organizes tenant case files and proofreads draft pleadings under attorney supervision.",
@@ -198,7 +199,7 @@ export const additional: Role[] = [
     title: "Volunteer, driver and logistics",
     organization: "Long Beach Community Table",
     location: "Long Beach, CA",
-    dates: "Jun 2026 – present",
+    dates: "2026 – present",
     lane: "Other",
     outcome: "Packs and delivers food on weekends.",
   },
@@ -206,9 +207,9 @@ export const additional: Role[] = [
     title: "Emergency medical technician",
     organization: "Monroe County EMT and Superior Ambulance",
     location: "Easton, CT, and Albuquerque, NM",
-    dates: "Apr 2025 – Apr 2026",
+    dates: "2025 – 2026",
     lane: "Other",
-    outcome: "Documented patient encounters as a per-diem EMT.",
+    outcome: "Per-diem EMT in Connecticut and New Mexico.",
   },
   {
     title: "Volunteer tutor",

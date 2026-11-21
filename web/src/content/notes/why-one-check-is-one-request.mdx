@@ -1,15 +1,13 @@
 # Why one check is one request
 
-**Decision.** `POST /v1/check` takes the whole brief and returns one report.
+The page sends the whole brief in one request and gets one report back.
 
-**Why.** Citation lookup already sends up to 60 citations in one
-CourtListener call.
+I looked at cutting a brief into sections and checking them in parallel. It
+would not have been faster. CourtListener allows five requests a minute, and
+parallel sections would share that allowance. The citation lookup already
+takes up to 60 citations in a single call. Streaming the report would not help
+either, because the hosting function stops at five minutes whether or not it
+is streaming.
 
-**What I rejected.**
-
-- _Cutting the brief into sections and sending those sections in parallel._
-  Parallel sections share one CourtListener allowance of 5 requests a minute.
-- _Streaming the report._ A stream still dies when the function reaches 5
-  minutes.
-
-**Cost.** A short brief finishes. A long brief with support verdicts may not.
+So a short brief finishes, and a long brief with support verdicts may run out
+of time.

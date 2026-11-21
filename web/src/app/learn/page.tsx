@@ -5,7 +5,7 @@ import { IndexItem, IndexList } from "@/components/site/IndexList";
 export const metadata: Metadata = {
   title: "Learn",
   description:
-    "Pages that explain citations and evaluation. They do not describe the tools.",
+    "Pages that explain how citations are built, how they fail, and how a checker is scored.",
 };
 
 export default function LearnPage() {
@@ -13,7 +13,7 @@ export default function LearnPage() {
     <>
       <h1>Learn</h1>
       <p className="lede">
-        These pages explain the subject. They do not say what the tools do.
+        How a citation is built, how one fails, and how a checker is scored.
       </p>
       <IndexList>
         {explainers.map((page) => (

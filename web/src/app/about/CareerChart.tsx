@@ -258,7 +258,7 @@ export function CareerChart({
                 </p>
                 {selected.role.explains && (
                   <p className="mt-site-2 text-step-small text-ink-soft">
-                    Explains{" "}
+                    Background for{" "}
                     {selected.role.explains.href ? (
                       <Link href={selected.role.explains.href}>
                         {selected.role.explains.label}
