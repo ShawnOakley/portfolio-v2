@@ -1,5 +1,7 @@
 /**
- * Refresh public/shawn-oakley-resume.pdf from the About print layout.
+ * Print the About page's résumé layout to a PDF.
+ * Since 2026-11-21 the site's download (public/shawn-oakley-resume.pdf) is the full
+ * résumé exported from Word, so running this overwrites it with the short version.
  * Start the site first: pnpm dev --port 3001
  * Then: node scripts/print-resume.mjs
  */
